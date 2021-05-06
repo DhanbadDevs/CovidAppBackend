@@ -16,6 +16,12 @@ namespace CovidApp.Core.Services
         {
             this.ambulanceRepository = ambulanceRepository;
         }
+
+        public async Task<Tuple<AmbulanceModel>> AddAmbulance(AmbulanceModel ambulanceModel)
+        {
+            return await ambulanceRepository.AddAmbulance(ambulanceModel);
+        }
+
         public async Task<IList<AmbulanceModel>> GetAmbulances()
         {
             return await ambulanceRepository.GetAmbulances();

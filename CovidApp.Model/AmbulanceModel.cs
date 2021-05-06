@@ -6,7 +6,6 @@ namespace CovidApp.Model
     {
         public long Id { get; set; }
         public string AmbulanceName { get; set; }
-        public long CityId { get; set; }
         public bool IsAirConditioned { get; set; }
         public bool OxygenAvailable { get; set; }
         public bool ProvidesOutstationService { get; set; }
@@ -20,5 +19,10 @@ namespace CovidApp.Model
         public int Votes { get; set; }
         public DateTime CreatedOn { get; set; }
         public CityModel City { get; set; }
+
+        public static implicit operator AmbulanceModel(Tuple<AmbulanceModel> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -26,6 +26,36 @@ namespace CovidApp.Persistance
             this.mapper = mapper;
         }
 
+        public async Task<Tuple<AmbulanceModel>> AddAmbulance(AmbulanceModel ambulanceModel)
+        {
+            var ambulance = new Ambulance {
+                Id = ambulanceModel.Id,
+                AmbulanceName=ambulanceModel.AmbulanceName,
+                IsAirConditioned=ambulanceModel.IsAirConditioned,
+                OxygenAvailable=ambulanceModel.OxygenAvailable,
+                ProvidesOutstationService=ambulanceModel.ProvidesOutstationService,
+                AcceptsCovidPatient = ambulanceModel.AcceptsCovidPatient,
+                Charges = ambulanceModel.Charges,
+                IsVerified = ambulanceModel.IsVerified,
+                Timing = ambulanceModel.Timing,
+                Notes = ambulanceModel.Notes,
+                UpdatedOn=ambulanceModel.UpdatedOn,
+                Phone=ambulanceModel.Phone,
+                Votes=ambulanceModel.Votes,
+                CreatedOn=ambulanceModel.CreatedOn,
+                City=new City {
+                    Id = ambulanceModel.City.Id,
+                    CityName = ambulanceModel.City.Name,
+                    State = ambulanceModel.City.State,
+                    CreatedOn = ambulanceModel.CreatedOn,
+                    UpdatedOn = ambulanceModel.UpdatedOn
+                }
+            };
+            await dbContext.Ambulances.AddAsync(ambulance);
+            await dbContext.SaveChangesAsync();
+            return Tuple.Create(ambulanceModel);
+        }
+
         public async Task<IList<AmbulanceModel>> GetAmbulances()
         {
             try
