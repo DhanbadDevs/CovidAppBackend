@@ -11,8 +11,8 @@ namespace CovidApp.Persistance.AutoMapping
     {
         public AutoMapping()
         {
-            CreateMap<Vaccine, VaccineModel>();
-            CreateMap<VaccineModel, Vaccine>();
+            CreateMap<VaccinationCentre, VaccineModel>();
+            CreateMap<VaccineModel, VaccinationCentre>();
             CreateMap<Location, LocationModel>();
             CreateMap<LocationType, LocationTypeModel>();
             CreateMap<City, CityModel>();

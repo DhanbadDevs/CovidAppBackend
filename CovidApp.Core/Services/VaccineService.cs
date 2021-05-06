@@ -20,6 +20,7 @@ namespace CovidApp.Core.Services
         public async Task<IList<VaccineModel>> GetVaccine()
         {
             return await vaccineRepository.GetVaccine();
+            return null;
         }
     }
 }

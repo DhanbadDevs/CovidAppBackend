@@ -8,25 +8,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CovidApp.Persistance.Entities
 {
-    [Table("LocationType")]
-    public partial class LocationType
+    [Table("MedicineEquipmentMaster")]
+    public partial class MedicineEquipmentMaster
     {
-        public LocationType()
+        public MedicineEquipmentMaster()
         {
-            Locations = new HashSet<Location>();
+            MedicineEquipments = new HashSet<MedicineEquipment>();
         }
 
         [Key]
         public long Id { get; set; }
         [Required]
-        [StringLength(50)]
-        public string LocationTypeName { get; set; }
+        [StringLength(200)]
+        public string MedicineEquipmentName { get; set; }
+        [StringLength(500)]
+        public string Notes { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime CreatedOn { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? UpdatedOn { get; set; }
 
-        [InverseProperty(nameof(Location.LocationType))]
-        public virtual ICollection<Location> Locations { get; set; }
+        [InverseProperty(nameof(MedicineEquipment.MedicineEquipmentNavigation))]
+        public virtual ICollection<MedicineEquipment> MedicineEquipments { get; set; }
     }
 }

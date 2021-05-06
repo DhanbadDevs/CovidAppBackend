@@ -15,7 +15,7 @@ namespace CovidApp.Persistance
 {
     public class VaccineRepository : IVaccineRepository
     {
-        readonly CovidAppDbContext dbContext;
+       readonly CovidAppDbContext dbContext;
         readonly ILogger<VaccineRepository> logger;
         readonly IMapper mapper;
 
@@ -29,10 +29,11 @@ namespace CovidApp.Persistance
         {
             try
             {
-                var results = await dbContext.Vaccines
+                var results = await dbContext.VaccinationCentres
                                             .Include(x => x.Location)
+                                            .OrderByDescending(x => x.IsAvailable)
                                             .ToListAsync();
-                return mapper.Map<List<Vaccine>, List<VaccineModel>>(results);
+                return mapper.Map<List<VaccinationCentre>, List<VaccineModel>>(results);
             }
             catch(Exception ex)
             {
