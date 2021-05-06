@@ -8,5 +8,7 @@ namespace CovidApp.Common.Constants
     {
         public const string OperationSuccessful = "Operation Successful";
         public const string NoVaccinationCentreFound = "No Vaccinination Centres found";
+        public const string NoAmbulanceFound = "No Ambulance found";
+
     }
 }
