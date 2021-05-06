@@ -18,7 +18,7 @@ namespace CovidApp.Model
         public string Note { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
-        public virtual CityModel City { get; set; }
-        public virtual LocationTypeModel Type { get; set; }
+        public CityModel City { get; set; }
+        public LocationTypeModel Type { get; set; }
     }
 }

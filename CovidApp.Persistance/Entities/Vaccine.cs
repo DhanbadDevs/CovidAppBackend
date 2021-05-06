@@ -25,10 +25,10 @@ namespace CovidApp.Persistance.Entities
         public string AgeGroup { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime Date { get; set; }
-        [Column(TypeName = "datetime")]
-        public DateTime StartTime { get; set; }
-        [Column(TypeName = "datetime")]
-        public DateTime EndTime { get; set; }
+        [StringLength(50)]
+        public string StartTime { get; set; }
+        [StringLength(50)]
+        public string EndTime { get; set; }
         public bool IsAvailable { get; set; }
         public int? Votes { get; set; }
         public bool IsVerified { get; set; }

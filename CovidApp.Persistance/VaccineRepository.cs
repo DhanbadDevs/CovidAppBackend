@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using AutoMapper;
+using CovidApp.Persistance.Entities;
 
 namespace CovidApp.Persistance
 {
@@ -15,16 +17,28 @@ namespace CovidApp.Persistance
     {
         readonly CovidAppDbContext dbContext;
         readonly ILogger<VaccineRepository> logger;
+        readonly IMapper mapper;
 
-        public VaccineRepository(CovidAppDbContext dbContext, ILogger<VaccineRepository> logger)
+        public VaccineRepository(CovidAppDbContext dbContext, ILogger<VaccineRepository> logger, IMapper mapper)
         {
             this.dbContext = dbContext;
             this.logger = logger;
+            this.mapper = mapper;
         }
-        public async Task<VaccineModel> GetVaccine()
+        public async Task<IList<VaccineModel>> GetVaccine()
         {
-            var vaccines = await dbContext.Vaccines.Where(x => x.IsAvailable == true).ToListAsync();
-            return null;
+            try
+            {
+                var results = await dbContext.Vaccines
+                                            .Include(x => x.Location)
+                                            .ToListAsync();
+                return mapper.Map<List<Vaccine>, List<VaccineModel>>(results);
+            }
+            catch(Exception ex)
+            {
+                logger.LogError("Failed to Get Vaccine", ex);
+                return null;
+            }
         }
     }
 }
