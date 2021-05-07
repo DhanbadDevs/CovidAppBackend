@@ -20,7 +20,7 @@ namespace CovidApp.Controllers
         {
             _logger = logger;
             this.ambulanceDelegate = ambulanceDelegate;
-            _logger.LogDebug(1, "NLog injected into VaccineController");
+            _logger.LogDebug(1, "NLog injected into AmbulanceController");
         }
 
         [HttpGet]
