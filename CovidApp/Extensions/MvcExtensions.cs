@@ -43,9 +43,9 @@ namespace CovidApp.Extensions
         /// <param name="services"></param>
         public static void Register(this IServiceCollection services)
         {
-            services.AddScoped<IVaccineRepository, VaccineRepository>();
-            services.AddScoped<IVaccineService, VaccineService>();
-            services.AddScoped<IVaccineDelegate, VaccineDelegate>();
+            services.AddScoped<IVaccinationCentreRepository, VaccinationCentreRepository>();
+            services.AddScoped<IVaccinationCentreService, VaccinationCentreService>();
+            services.AddScoped<IVaccinationCentreDelegate, VaccinationCentreDelegate>();
             services.AddScoped<IAmbulanceRepository, AmbulanceRepository>();
             services.AddScoped<IAmbulanceService, AmbulanceService>();
             services.AddScoped<IAmbulanceDelegate, AmbulanceDelegate>();

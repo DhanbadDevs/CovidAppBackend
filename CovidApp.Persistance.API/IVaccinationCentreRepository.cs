@@ -6,8 +6,8 @@ using CovidApp.Model;
 
 namespace CovidApp.Persistance.API
 {
-    public interface IVaccineRepository
+    public interface IVaccinationCentreRepository
     {
-        Task<IList<VaccineModel>> GetVaccine();
+        Task<IList<VaccinationCentreModel>> GetVaccinationCentre();
     }
 }

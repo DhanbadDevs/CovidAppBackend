@@ -35,5 +35,20 @@ namespace CovidApp.Controllers
 
         }
 
+        [HttpGet("location")]
+        public async Task<IActionResult> GetLocations(long cityId)
+        {
+            var response = await masterDelegate.GetLocations(cityId);
+            return Ok(response);
+        }
+
+        [HttpPost("location")]
+        public async Task<IActionResult> AddLocation([FromBody] LocationModel locationModel)
+        {
+            var response = await masterDelegate.AddLocation(locationModel);
+
+            return StatusCode(StatusCodes.Status201Created, response);
+
+        }
     }
 }

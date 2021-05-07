@@ -10,5 +10,7 @@ namespace CovidApp.Core.API.Services
     {
         Task<IList<CityModel>> GetCities();
         Task<Tuple<CityModel>> AddCity(CityModel cityModel);
+        Task<IList<LocationModel>> GetLocations(long cityId);
+        Task<LocationModel> AddLocation(LocationModel locationModel);
     }
 }

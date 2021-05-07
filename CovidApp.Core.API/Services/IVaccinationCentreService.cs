@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CovidApp.Core.API.Services
 {
-    public interface IVaccineService
+    public interface IVaccinationCentreService
     {
-        Task<IList<VaccineModel>> GetVaccine();
+        Task<IList<VaccinationCentreModel>> GetVaccinationCentre();
     }
 }

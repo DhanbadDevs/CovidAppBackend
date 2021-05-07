@@ -11,10 +11,13 @@ namespace CovidApp.Persistance.AutoMapping
     {
         public AutoMapping()
         {
-            CreateMap<VaccinationCentre, VaccineModel>();
-            CreateMap<VaccineModel, VaccinationCentre>();
+            CreateMap<VaccinationCentre, VaccinationCentreModel>();
+            CreateMap<VaccinationCentreModel, VaccinationCentre>();
             CreateMap<Location, LocationModel>();
+            CreateMap<LocationModel, Location>().ForMember(x => x.LocationType, opt => opt.Ignore())
+                                                .ForMember(x => x.City, opt => opt.Ignore());
             CreateMap<LocationType, LocationTypeModel>();
+            CreateMap<LocationTypeModel, LocationType>();
             CreateMap<City, CityModel>();
             CreateMap<Ambulance, AmbulanceModel>();
             CreateMap<AmbulanceModel, Ambulance>();
