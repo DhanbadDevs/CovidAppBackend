@@ -16,6 +16,10 @@ namespace CovidApp.Persistance.AutoMapping
             CreateMap<Location, LocationModel>();
             CreateMap<LocationType, LocationTypeModel>();
             CreateMap<City, CityModel>();
+            CreateMap<Ambulance, AmbulanceModel>();
+            CreateMap<AmbulanceModel, Ambulance>();
+            CreateMap<CityModel, City>();
+
         }
     }
 }
