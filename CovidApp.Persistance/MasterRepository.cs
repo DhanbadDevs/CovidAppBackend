@@ -41,6 +41,22 @@ namespace CovidApp.Persistance
             return Tuple.Create(cityModel);
         }
 
+        public async Task<LocationModel> AddLocation(LocationModel locationModel)
+        {
+            try
+            {
+                var location = mapper.Map<LocationModel, Location>(locationModel);
+                await dbContext.AddAsync(location);
+                await dbContext.SaveChangesAsync();
+                return locationModel;
+            }
+            catch(Exception ex)
+            {
+                logger.LogError("Failed to Add Location", ex);
+                return null;
+            }
+        }
+
         public async Task<IList<CityModel>> GetCities()
         {
             try
@@ -55,6 +71,16 @@ namespace CovidApp.Persistance
                 logger.LogError("Failed to Get Vaccine", ex);
                 return null;
             }
+        }
+
+        public async Task<IList<LocationModel>> GetLocations(long cityId)
+        {
+            var result = await dbContext.Locations.Where(x => x.CityId == cityId)
+                                                   .OrderByDescending(x => x.Votes)
+                                                   .ThenBy(x => x.LocationName)
+                                                   .ToListAsync();
+
+            return mapper.Map<List<Location>, List<LocationModel>>(result);
         }
     }
 }

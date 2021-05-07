@@ -13,19 +13,36 @@ using CovidApp.Persistance.Entities;
 
 namespace CovidApp.Persistance
 {
-    public class VaccineRepository : IVaccineRepository
+    public class VaccinationCentreRepository : IVaccinationCentreRepository
     {
        readonly CovidAppDbContext dbContext;
-        readonly ILogger<VaccineRepository> logger;
+        readonly ILogger<VaccinationCentreRepository> logger;
         readonly IMapper mapper;
 
-        public VaccineRepository(CovidAppDbContext dbContext, ILogger<VaccineRepository> logger, IMapper mapper)
+        public VaccinationCentreRepository(CovidAppDbContext dbContext, ILogger<VaccinationCentreRepository> logger, IMapper mapper)
         {
             this.dbContext = dbContext;
             this.logger = logger;
             this.mapper = mapper;
         }
-        public async Task<IList<VaccineModel>> GetVaccine()
+
+        public async Task<VaccinationCentreModel> AddVaccinationCentre(VaccinationCentreModel vaccinationCentreModel)
+        {
+            try
+            {
+                var vaccinationCentre = mapper.Map<VaccinationCentreModel, VaccinationCentre>(vaccinationCentreModel);
+                await dbContext.AddAsync(vaccinationCentre);
+                await dbContext.SaveChangesAsync();
+                return vaccinationCentreModel;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Failed to Add Vaccination Centre", ex);
+                return null;
+            }
+        }
+
+        public async Task<IList<VaccinationCentreModel>> GetVaccinationCentre()
         {
             try
             {
@@ -33,7 +50,7 @@ namespace CovidApp.Persistance
                                             .Include(x => x.Location)
                                             .OrderByDescending(x => x.IsAvailable)
                                             .ToListAsync();
-                return mapper.Map<List<VaccinationCentre>, List<VaccineModel>>(results);
+                return mapper.Map<List<VaccinationCentre>, List<VaccinationCentreModel>>(results);
             }
             catch(Exception ex)
             {
