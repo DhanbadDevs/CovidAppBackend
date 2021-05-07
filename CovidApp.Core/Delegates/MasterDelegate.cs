@@ -24,7 +24,7 @@ namespace CovidApp.Core.Delegates
 
         public async Task<ServerResponse<IList<CityModel>>> GetCities()
         {
-            var result = await masterService.GetCities();
+            IList<CityModel> result = await masterService.GetCities();
             if (result == null)
                 return new ServerResponse<IList<CityModel>> { Message = Messages.NoCityFound };
             else

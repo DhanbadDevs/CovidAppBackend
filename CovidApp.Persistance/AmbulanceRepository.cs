@@ -28,8 +28,7 @@ namespace CovidApp.Persistance
 
         public async Task<Tuple<AmbulanceModel>> AddAmbulance(AmbulanceModel ambulanceModel)
         {
-           /* var ambulance = new Ambulance {
-                Id = ambulanceModel.Id,
+            /*var ambulance = new Ambulance {
                 AmbulanceName=ambulanceModel.AmbulanceName,
                 IsAirConditioned=ambulanceModel.IsAirConditioned,
                 OxygenAvailable=ambulanceModel.OxygenAvailable,
@@ -44,8 +43,8 @@ namespace CovidApp.Persistance
                 Votes=ambulanceModel.Votes,
                 CreatedOn=ambulanceModel.CreatedOn,
                 CityId=ambulanceModel.CityId
-            };
-           */
+            };*/
+           
             var ambulance =mapper.Map<AmbulanceModel, Ambulance>(ambulanceModel);
             await dbContext.Ambulances.AddAsync(ambulance);
             await dbContext.SaveChangesAsync();

@@ -20,7 +20,7 @@ namespace CovidApp.Core.Delegates
         public async Task<Tuple<ServerResponse<AmbulanceModel>>> AddAmbulance(AmbulanceModel ambulanceModel)
         {
             var ambulance = await ambulanceService.AddAmbulance(ambulanceModel);
-            return Tuple.Create(new ServerResponse<AmbulanceModel> { Message = Messages.OperationSuccessful,Payload=ambulance });
+            return Tuple.Create(new ServerResponse<AmbulanceModel> { Message = Messages.OperationSuccessful,Payload=ambulance.Item1 });
         }
 
         public async Task<ServerResponse<IList<AmbulanceModel>>> GetAmbulances()
