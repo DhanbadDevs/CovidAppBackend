@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CovidApp.Persistance.API
+namespace CovidApp.Core.API.Services
 {
-    public interface IMasterRepository
+    public interface IMasterService
     {
         Task<IList<CityModel>> GetCities();
         Task<Tuple<CityModel>> AddCity(CityModel cityModel);

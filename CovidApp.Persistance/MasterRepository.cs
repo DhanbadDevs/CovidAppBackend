@@ -2,6 +2,7 @@
 using CovidApp.Model;
 using CovidApp.Persistance.API;
 using CovidApp.Persistance.CovidAppContext;
+using CovidApp.Persistance.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,9 +18,20 @@ namespace CovidApp.Persistance
         readonly CovidAppDbContext dbContext;
         readonly ILogger<MasterRepository> logger;
         readonly IMapper mapper;
-        public Task<Tuple<CityModel>> AddCity()
+
+        public MasterRepository(CovidAppDbContext dbContext, ILogger<MasterRepository> logger, IMapper mapper)
         {
-            throw new NotImplementedException();
+            this.dbContext = dbContext;
+            this.logger = logger;
+            this.mapper = mapper;
+        }
+
+        public async Task<Tuple<CityModel>> AddCity(CityModel cityModel)
+        {
+            var city = mapper.Map<CityModel, City>(cityModel);
+            await dbContext.AddAsync(city);
+            await dbContext.SaveChangesAsync();
+            return Tuple.Create(cityModel);
         }
 
         public async Task<IList<CityModel>> GetCities()
@@ -28,10 +40,10 @@ namespace CovidApp.Persistance
             {
                 var result=await dbContext.Cities.OrderByDescending(x => x.UpdatedOn)
                                             .ToListAsync();
-
+                return mapper.Map<List<City>,List<CityModel>>(result);
 
             }
-            catch(Exception e)
+            catch(Exception ex)
             {
                 logger.LogError("Failed to Get Vaccine", ex);
                 return null;
