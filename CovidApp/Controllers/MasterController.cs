@@ -26,7 +26,7 @@ namespace CovidApp.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
+        [HttpPost("city")]
         public async Task<IActionResult> AddCity([FromBody] CityModel cityModel)
         {
             var response = await masterDelegate.AddCity(cityModel);
