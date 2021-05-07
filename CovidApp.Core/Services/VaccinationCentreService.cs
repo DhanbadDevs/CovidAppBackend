@@ -17,6 +17,11 @@ namespace CovidApp.Core.Services
             this.vaccinationCentreRepository = vaccinationCentreRepository;
         }
 
+        public async Task<VaccinationCentreModel> AddVaccinationCentre(VaccinationCentreModel vaccinationCentreModel)
+        {
+            return await vaccinationCentreRepository.AddVaccinationCentre(vaccinationCentreModel);
+        }
+
         public async Task<IList<VaccinationCentreModel>> GetVaccinationCentre()
         {
             return await vaccinationCentreRepository.GetVaccinationCentre();

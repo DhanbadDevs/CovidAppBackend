@@ -9,5 +9,6 @@ namespace CovidApp.Core.API.Services
     public interface IVaccinationCentreService
     {
         Task<IList<VaccinationCentreModel>> GetVaccinationCentre();
+        Task<VaccinationCentreModel> AddVaccinationCentre(VaccinationCentreModel vaccinationCentreModel);
     }
 }

@@ -25,6 +25,23 @@ namespace CovidApp.Persistance
             this.logger = logger;
             this.mapper = mapper;
         }
+
+        public async Task<VaccinationCentreModel> AddVaccinationCentre(VaccinationCentreModel vaccinationCentreModel)
+        {
+            try
+            {
+                var vaccinationCentre = mapper.Map<VaccinationCentreModel, VaccinationCentre>(vaccinationCentreModel);
+                await dbContext.AddAsync(vaccinationCentre);
+                await dbContext.SaveChangesAsync();
+                return vaccinationCentreModel;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Failed to Add Vaccination Centre", ex);
+                return null;
+            }
+        }
+
         public async Task<IList<VaccinationCentreModel>> GetVaccinationCentre()
         {
             try

@@ -1,4 +1,6 @@
 ﻿using CovidApp.Core.API.Delegates;
+using CovidApp.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CovidApp.Controllers
 {
-    [Route("api/vaccine")]
+    [Route("api/vaccinationcentre")]
     public class VaccinationCentreController : Controller
     {
         readonly IVaccinationCentreDelegate vaccinationCentreDelegate;
@@ -25,6 +27,13 @@ namespace CovidApp.Controllers
         {
             var response = await vaccinationCentreDelegate.GetVaccinationCentre();
             return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddLocation([FromBody] VaccinationCentreModel vaccinationCentreModel)
+        {
+            var response = await vaccinationCentreDelegate.AddVaccinationCentre(vaccinationCentreModel);
+            return StatusCode(StatusCodes.Status201Created, response);
         }
     }
 }

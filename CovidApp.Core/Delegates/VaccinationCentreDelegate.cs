@@ -18,6 +18,20 @@ namespace CovidApp.Core.Delegates
             this.vaccinationCentreService = vaccinationCentreService;
         }
 
+        public async Task<ServerResponse<VaccinationCentreModel>> AddVaccinationCentre(VaccinationCentreModel vaccinationCentreModel)
+        {
+            if (vaccinationCentreModel == null || vaccinationCentreModel.LocationId == 0 || vaccinationCentreModel.CityId == 0
+                || vaccinationCentreModel.Date == null || vaccinationCentreModel.CreatedOn == null)
+                return new ServerResponse<VaccinationCentreModel> { Message = Messages.InvalidInput };
+
+            var result = await vaccinationCentreService.AddVaccinationCentre(vaccinationCentreModel);
+
+            if (result == null)
+                return new ServerResponse<VaccinationCentreModel> { Message = Messages.ErrorOccured };
+
+            return new ServerResponse<VaccinationCentreModel> { Message = Messages.OperationSuccessful, Payload = result };
+        }
+
         public async Task<ServerResponse<IList<VaccinationCentreModel>>> GetVaccinationCentre()
         {
             var result = await vaccinationCentreService.GetVaccinationCentre();
