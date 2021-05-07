@@ -18,8 +18,7 @@ namespace CovidApp.Model
         public string Phone { get; set; }
         public int Votes { get; set; }
         public DateTime CreatedOn { get; set; }
-        public CityModel City { get; set; }
-
+        public long CityId { get; set; }
         public static implicit operator AmbulanceModel(Tuple<AmbulanceModel> v)
         {
             throw new NotImplementedException();

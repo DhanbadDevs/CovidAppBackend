@@ -43,13 +43,7 @@ namespace CovidApp.Persistance
                 Phone=ambulanceModel.Phone,
                 Votes=ambulanceModel.Votes,
                 CreatedOn=ambulanceModel.CreatedOn,
-                City=new City {
-                    Id = ambulanceModel.City.Id,
-                    CityName = ambulanceModel.City.Name,
-                    State = ambulanceModel.City.State,
-                    CreatedOn = ambulanceModel.CreatedOn,
-                    UpdatedOn = ambulanceModel.UpdatedOn
-                }
+                CityId=ambulanceModel.CityId
             };
             await dbContext.Ambulances.AddAsync(ambulance);
             await dbContext.SaveChangesAsync();
