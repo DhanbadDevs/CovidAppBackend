@@ -7,6 +7,6 @@ namespace CovidApp.Persistance.API
     public interface IAmbulanceRepository
     {
         Task<IList<AmbulanceModel>> GetAmbulances();
-        Task<Tuple<AmbulanceModel>> AddAmbulance(AmbulanceModel ambulanceModel);
+        Task<AmbulanceModel> AddAmbulance(AmbulanceModel ambulanceModel);
     }
 }

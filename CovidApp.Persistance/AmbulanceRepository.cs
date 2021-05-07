@@ -26,29 +26,21 @@ namespace CovidApp.Persistance
             this.mapper = mapper;
         }
 
-        public async Task<Tuple<AmbulanceModel>> AddAmbulance(AmbulanceModel ambulanceModel)
+        public async Task<AmbulanceModel> AddAmbulance(AmbulanceModel ambulanceModel)
         {
-            /*var ambulance = new Ambulance {
-                AmbulanceName=ambulanceModel.AmbulanceName,
-                IsAirConditioned=ambulanceModel.IsAirConditioned,
-                OxygenAvailable=ambulanceModel.OxygenAvailable,
-                ProvidesOutstationService=ambulanceModel.ProvidesOutstationService,
-                AcceptsCovidPatient = ambulanceModel.AcceptsCovidPatient,
-                Charges = ambulanceModel.Charges,
-                IsVerified = ambulanceModel.IsVerified,
-                Timing = ambulanceModel.Timing,
-                Notes = ambulanceModel.Notes,
-                UpdatedOn=ambulanceModel.UpdatedOn,
-                Phone=ambulanceModel.Phone,
-                Votes=ambulanceModel.Votes,
-                CreatedOn=ambulanceModel.CreatedOn,
-                CityId=ambulanceModel.CityId
-            };*/
-           
-            var ambulance =mapper.Map<AmbulanceModel, Ambulance>(ambulanceModel);
-            await dbContext.Ambulances.AddAsync(ambulance);
-            await dbContext.SaveChangesAsync();
-            return Tuple.Create(ambulanceModel);
+            try
+            {
+                var ambulance = mapper.Map<AmbulanceModel, Ambulance>(ambulanceModel);
+                await dbContext.Ambulances.AddAsync(ambulance);
+                await dbContext.SaveChangesAsync();
+                return ambulanceModel;
+            }
+            catch(Exception ex)
+            {
+                logger.LogError("Failed to Add Ambulance", ex);
+                return null;
+            }
+
         }
 
         public async Task<IList<AmbulanceModel>> GetAmbulances()
@@ -63,7 +55,7 @@ namespace CovidApp.Persistance
             }
             catch (Exception ex)
             {
-                logger.LogError("Failed to Get Vaccine", ex);
+                logger.LogError("Failed to Get Ambulance", ex);
                 return null;
             }
         }
