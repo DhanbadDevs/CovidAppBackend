@@ -15,7 +15,7 @@ namespace CovidApp.Persistance
 {
     public class VaccinationCentreRepository : IVaccinationCentreRepository
     {
-       readonly CovidAppDbContext dbContext;
+        readonly CovidAppDbContext dbContext;
         readonly ILogger<VaccinationCentreRepository> logger;
         readonly IMapper mapper;
 
@@ -31,7 +31,7 @@ namespace CovidApp.Persistance
             try
             {
                 var vaccinationCentre = mapper.Map<VaccinationCentreModel, VaccinationCentre>(vaccinationCentreModel);
-                await dbContext.AddAsync(vaccinationCentre);
+                await dbContext.VaccinationCentres.AddAsync(vaccinationCentre);
                 await dbContext.SaveChangesAsync();
                 return vaccinationCentreModel;
             }

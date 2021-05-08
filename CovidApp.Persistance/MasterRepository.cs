@@ -36,7 +36,7 @@ namespace CovidApp.Persistance
                 State=cityModel.State
             };*/
             var city = mapper.Map<CityModel, City>(cityModel);
-            await dbContext.AddAsync(city);
+            await dbContext.Cities.AddAsync(city);
             await dbContext.SaveChangesAsync();
             return Tuple.Create(cityModel);
         }
@@ -46,7 +46,7 @@ namespace CovidApp.Persistance
             try
             {
                 var location = mapper.Map<LocationModel, Location>(locationModel);
-                await dbContext.AddAsync(location);
+                await dbContext.Locations.AddAsync(location);
                 await dbContext.SaveChangesAsync();
                 return locationModel;
             }
