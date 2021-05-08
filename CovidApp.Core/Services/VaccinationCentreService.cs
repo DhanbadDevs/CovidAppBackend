@@ -22,9 +22,9 @@ namespace CovidApp.Core.Services
             return await vaccinationCentreRepository.AddVaccinationCentre(vaccinationCentreModel);
         }
 
-        public async Task<IList<VaccinationCentreModel>> GetVaccinationCentre()
+        public async Task<IList<VaccinationCentreModel>> GetVaccinationCentre(int cityId)
         {
-            return await vaccinationCentreRepository.GetVaccinationCentre();
+            return await vaccinationCentreRepository.GetVaccinationCentre(cityId);
         }
     }
 }

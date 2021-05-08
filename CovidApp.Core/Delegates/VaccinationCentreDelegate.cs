@@ -33,9 +33,9 @@ namespace CovidApp.Core.Delegates
             return new ServerResponse<VaccinationCentreModel> { Message = Messages.OperationSuccessful, Payload = result };
         }
 
-        public async Task<ServerResponse<IList<VaccinationCentreModel>>> GetVaccinationCentre()
+        public async Task<ServerResponse<IList<VaccinationCentreModel>>> GetVaccinationCentre(int cityId)
         {
-            var result = await vaccinationCentreService.GetVaccinationCentre();
+            var result = await vaccinationCentreService.GetVaccinationCentre(cityId);
 
             if (result == null)
                 return new ServerResponse<IList<VaccinationCentreModel>> { Message = Messages.ErrorOccured };

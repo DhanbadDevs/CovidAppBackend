@@ -42,11 +42,12 @@ namespace CovidApp.Persistance
             }
         }
 
-        public async Task<IList<VaccinationCentreModel>> GetVaccinationCentre()
+        public async Task<IList<VaccinationCentreModel>> GetVaccinationCentre(int cityId)
         {
             try
             {
                 var results = await dbContext.VaccinationCentres
+                                            .Where(x => x.CityId == cityId)
                                             .Include(x => x.Location)
                                             .OrderByDescending(x => x.IsAvailable)
                                             .ToListAsync();
