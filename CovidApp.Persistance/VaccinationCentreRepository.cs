@@ -37,7 +37,7 @@ namespace CovidApp.Persistance
             }
             catch (Exception ex)
             {
-                logger.LogError("Failed to Add Vaccination Centre", ex);
+                logger.LogError("Faild to Add Vaccination Centre", ex);
                 return null;
             }
         }

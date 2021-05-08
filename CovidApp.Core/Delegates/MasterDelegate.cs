@@ -47,7 +47,6 @@ namespace CovidApp.Core.Delegates
                 return new ServerResponse<IList<CityModel>> { Message = Messages.NoCityFound };
             else
                 return new ServerResponse<IList<CityModel>> { Message = Messages.OperationSuccessful, Payload = result };
-
         }
 
         public async Task<ServerResponse<IList<LocationModel>>> GetLocations(long cityId)

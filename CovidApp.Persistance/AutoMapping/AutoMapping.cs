@@ -26,6 +26,10 @@ namespace CovidApp.Persistance.AutoMapping
             CreateMap<HospitalBedModel, HospitalBed>().ForMember(x => x.City, opt => opt.Ignore())
                                                        .ForMember(x => x.Location, opt => opt.Ignore());
             CreateMap<HospitalBed, HospitalBedModel>();
+            CreateMap<MedicineEquipment, MedicineEquipmentModel>();
+            CreateMap<MedicineEquipmentModel, MedicineEquipment>().ForMember(x => x.Location, opt => opt.Ignore());
+            CreateMap<MedicineEquipmentMaster, MedicineEquipmentMasterModel>();
+            CreateMap<MedicineEquipmentMasterModel, MedicineEquipmentMaster>();
         }
     }
 }
