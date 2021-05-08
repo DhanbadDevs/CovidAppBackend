@@ -4,6 +4,7 @@ using CovidApp.Core.API.Services;
 using CovidApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,6 +42,8 @@ namespace CovidApp.Core.Delegates
         {
             IList<CityModel> result = await masterService.GetCities();
             if (result == null)
+                return new ServerResponse<IList<CityModel>> { Message = Messages.ErrorOccured };
+            else if (!result.Any())
                 return new ServerResponse<IList<CityModel>> { Message = Messages.NoCityFound };
             else
                 return new ServerResponse<IList<CityModel>> { Message = Messages.OperationSuccessful, Payload = result };
@@ -51,6 +54,8 @@ namespace CovidApp.Core.Delegates
         {
             var result = await masterService.GetLocations(cityId);
             if (result == null)
+                return new ServerResponse<IList<LocationModel>> { Message = Messages.ErrorOccured };
+            else if (!result.Any())
                 return new ServerResponse<IList<LocationModel>> { Message = Messages.NoLocationFound };
             else
                 return new ServerResponse<IList<LocationModel>> { Message = Messages.OperationSuccessful, Payload = result };

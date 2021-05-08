@@ -4,6 +4,7 @@ using CovidApp.Core.API.Services;
 using CovidApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,6 +29,8 @@ namespace CovidApp.Core.Delegates
             var result = await hospitalBedService.GetHospitalBeds(bedType);
 
             if (result == null)
+                return new ServerResponse<IList<HospitalBedModel>> { Message = Messages.ErrorOccured };
+            else if(!result.Any())
                 return new ServerResponse<IList<HospitalBedModel>> { Message = Messages.NoHospitalBedsFound };
             else
                 return new ServerResponse<IList<HospitalBedModel>> { Message = Messages.OperationSuccessful, Payload = result };

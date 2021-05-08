@@ -23,7 +23,8 @@ namespace CovidApp.Persistance.AutoMapping
             CreateMap<Ambulance, AmbulanceModel>();
             CreateMap<AmbulanceModel, Ambulance>();
             CreateMap<CityModel, City>();
-
+            CreateMap<HospitalBedModel, HospitalBed>();
+            CreateMap<HospitalBed, HospitalBedModel>();
         }
     }
 }

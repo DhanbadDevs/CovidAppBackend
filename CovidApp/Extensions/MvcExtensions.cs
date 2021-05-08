@@ -52,6 +52,9 @@ namespace CovidApp.Extensions
             services.AddScoped<IMasterRepository, MasterRepository>();
             services.AddScoped<IMasterService, MasterService>();
             services.AddScoped<IMasterDelegate, MasterDelegate>();
+            services.AddScoped<IHospitalBedRepository, HospitalBedRepository>();
+            services.AddScoped<IHospitalBedService, HospitalBedService>();
+            services.AddScoped<IHospitalBedDelegate, HospitalBedDelegate>();
         }
     }
 }

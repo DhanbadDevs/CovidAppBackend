@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CovidApp.Controllers
 {
-    [Route("api/vaccinationcentre")]
+    [Route("api/hospitalbeds")]
     public class HospitalBedController : Controller
     {
         readonly IHospitalBedDelegate hospitalBedDelegate;
