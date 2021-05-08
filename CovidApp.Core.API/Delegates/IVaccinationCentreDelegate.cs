@@ -8,7 +8,7 @@ namespace CovidApp.Core.API.Delegates
 {
     public interface IVaccinationCentreDelegate
     {
-        Task<ServerResponse<IList<VaccinationCentreModel>>> GetVaccinationCentre();
+        Task<ServerResponse<IList<VaccinationCentreModel>>> GetVaccinationCentre(int cityId);
         Task<ServerResponse<VaccinationCentreModel>> AddVaccinationCentre(VaccinationCentreModel vaccinationCentreModel);
     }
 }
