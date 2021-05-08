@@ -42,12 +42,12 @@ namespace CovidApp.Persistance
             }
         }
 
-        public async Task<IList<HospitalBedModel>> GetHospitalBeds(string bedType)
+        public async Task<IList<HospitalBedModel>> GetHospitalBeds(string bedType,int cityId)
         {
             try
             {
                 var hospitalBeds = await dbContext.HospitalBeds
-                                            .Where(x => x.BedType == bedType)
+                                            .Where(x => x.BedType == bedType && x.CityId == cityId)
                                             .Include(x => x.Location)
                                             .ToListAsync();
                 hospitalBeds = hospitalBeds.GroupBy(x => x.LocationId)

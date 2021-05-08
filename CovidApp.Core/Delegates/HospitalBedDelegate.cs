@@ -34,9 +34,12 @@ namespace CovidApp.Core.Delegates
             return new ServerResponse<HospitalBedModel> { Message = Messages.OperationSuccessful, Payload = result };
         }
 
-        public async Task<ServerResponse<IList<HospitalBedModel>>> GetHospitalBeds(string bedType)
+        public async Task<ServerResponse<IList<HospitalBedModel>>> GetHospitalBeds(string bedType, int cityId)
         {
-            var result = await hospitalBedService.GetHospitalBeds(bedType);
+            if (cityId == 0 || String.IsNullOrWhiteSpace(bedType))
+                return new ServerResponse<IList<HospitalBedModel>> { Message = Messages.InvalidInput };
+
+            var result = await hospitalBedService.GetHospitalBeds(bedType, cityId);
 
             if (result == null)
                 return new ServerResponse<IList<HospitalBedModel>> { Message = Messages.ErrorOccured };
