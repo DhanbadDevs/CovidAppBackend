@@ -9,6 +9,6 @@ namespace CovidApp.Core.API.Delegates
     public interface IHospitalBedDelegate
     {
         Task<ServerResponse<IList<HospitalBedModel>>> GetHospitalBeds(string bedType);
-        Task<ServerResponse<IList<HospitalBedModel>>> AddOrUpdateHospitalBed(HospitalBedModel hospitalBedModel);
+        Task<ServerResponse<HospitalBedModel>> AddOrUpdateHospitalBed(HospitalBedModel hospitalBedModel);
     }
 }

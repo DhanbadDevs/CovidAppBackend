@@ -30,30 +30,9 @@ namespace CovidApp.Persistance
         {
             try
             {
-                var hospitalBed = await dbContext.HospitalBeds
-                                                 .Where(x => x.CityId == hospitalBedModel.CityId
-                                                            && x.LocationId == hospitalBedModel.LocationId
-                                                            && x.BedType == hospitalBedModel.BedType)
-                                                 .FirstOrDefaultAsync();
-                if (hospitalBed != null)
-                {
-                    hospitalBed.BedCount = hospitalBedModel.BedCount;
-                    hospitalBed.Charges = hospitalBedModel.Charges;
-                    hospitalBed.IsVerified = hospitalBedModel.IsVerified;
-                    hospitalBed.Notes = hospitalBedModel.Notes;
-                    hospitalBed.Phone = hospitalBedModel.Phone;
-                    if (hospitalBed.BedCount != hospitalBedModel.BedCount)
-                        hospitalBed.Votes = 0;
-                    hospitalBed.UpdatedOn = DateTime.UtcNow;
-                } 
-                else
-                {
-                    hospitalBed = mapper.Map<HospitalBedModel, HospitalBed>(hospitalBedModel);
-                    await dbContext.HospitalBeds.AddAsync(hospitalBed);
-                }
-
+                var hospitalBed = mapper.Map<HospitalBedModel, HospitalBed>(hospitalBedModel);
+                await dbContext.HospitalBeds.AddAsync(hospitalBed);
                 await dbContext.SaveChangesAsync();
-
                 return mapper.Map<HospitalBed, HospitalBedModel>(hospitalBed);
             }
             catch(Exception ex)
@@ -68,12 +47,17 @@ namespace CovidApp.Persistance
             try
             {
                 var hospitalBeds = await dbContext.HospitalBeds
+                                            .Where(x => x.BedType == bedType)
                                             .Include(x => x.Location)
+                                            .ToListAsync();
+                hospitalBeds = hospitalBeds.GroupBy(x => x.LocationId)
+                                            .Select(x => x.OrderByDescending(y => y.UpdatedOn).FirstOrDefault())
                                             .OrderByDescending(x => x.IsVerified)
                                             .ThenByDescending(x => x.BedCount)
                                             .ThenByDescending(x => x.Votes)
-                                            .Where(x => x.BedType == bedType)
-                                            .ToListAsync();
+                                            .ToList();
+
+
                 return mapper.Map<List<HospitalBed>, List<HospitalBedModel>>(hospitalBeds);
             }
             catch(Exception ex)

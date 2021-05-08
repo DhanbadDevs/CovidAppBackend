@@ -19,9 +19,19 @@ namespace CovidApp.Core.Delegates
             this.hospitalBedService = hospitalBedService;
         }
 
-        public Task<ServerResponse<IList<HospitalBedModel>>> AddOrUpdateHospitalBed(HospitalBedModel hospitalBedModel)
+        public async Task<ServerResponse<HospitalBedModel>> AddOrUpdateHospitalBed(HospitalBedModel hospitalBedModel)
         {
-            throw new NotImplementedException();
+            if (hospitalBedModel == null || hospitalBedModel.LocationId == 0 || hospitalBedModel.CityId == 0
+                || String.IsNullOrWhiteSpace(hospitalBedModel.BedType) || hospitalBedModel.CreatedOn == null
+                || hospitalBedModel.City == null || hospitalBedModel.Location == null)
+                return new ServerResponse<HospitalBedModel> { Message = Messages.InvalidInput };
+
+            var result = await hospitalBedService.AddOrUpdateHospitalBed(hospitalBedModel);
+
+            if (result == null)
+                return new ServerResponse<HospitalBedModel> { Message = Messages.ErrorOccured };
+
+            return new ServerResponse<HospitalBedModel> { Message = Messages.OperationSuccessful, Payload = result };
         }
 
         public async Task<ServerResponse<IList<HospitalBedModel>>> GetHospitalBeds(string bedType)
