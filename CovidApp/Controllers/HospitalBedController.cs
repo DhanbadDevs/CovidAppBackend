@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CovidApp.Controllers
 {
+    [ApiController]
     [Route("api/hospitalbeds")]
     public class HospitalBedController : Controller
     {

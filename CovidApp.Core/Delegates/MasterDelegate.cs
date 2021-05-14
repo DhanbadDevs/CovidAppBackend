@@ -56,9 +56,9 @@ namespace CovidApp.Core.Delegates
                 return new ServerResponse<IList<CityModel>> { Message = Messages.OperationSuccessful, Payload = result };
         }
 
-        public async Task<ServerResponse<IList<LocationModel>>> GetLocations(long cityId)
+        public async Task<ServerResponse<IList<LocationModel>>> GetLocations(long cityId, long locationTypeId)
         {
-            var result = await masterService.GetLocations(cityId);
+            var result = await masterService.GetLocations(cityId, locationTypeId);
             if (result == null)
                 return new ServerResponse<IList<LocationModel>> { Message = Messages.ErrorOccured };
             else if (!result.Any())

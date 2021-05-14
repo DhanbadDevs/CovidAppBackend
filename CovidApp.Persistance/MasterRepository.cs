@@ -28,17 +28,18 @@ namespace CovidApp.Persistance
 
         public async Task<CityModel> AddCity(CityModel cityModel)
         {
-            /*var city = new City
+            try
             {
-                CityName = cityModel.CityName,
-                UpdatedOn = cityModel.UpdatedOn,
-                CreatedOn = cityModel.CreatedOn,
-                State=cityModel.State
-            };*/
-            var city = mapper.Map<CityModel, City>(cityModel);
-            await dbContext.Cities.AddAsync(city);
-            await dbContext.SaveChangesAsync();
-            return (cityModel);
+                var city = mapper.Map<CityModel, City>(cityModel);
+                await dbContext.AddAsync(city);
+                await dbContext.SaveChangesAsync();
+                return cityModel;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Failed to Add City", ex);
+                return null;
+            }
         }
 
         public async Task<LocationModel> AddLocation(LocationModel locationModel)
@@ -68,19 +69,35 @@ namespace CovidApp.Persistance
             }
             catch(Exception ex)
             {
-                logger.LogError("Failed to Get Vaccine", ex);
+                logger.LogError("Failed to Get Cities", ex);
                 return null;
             }
         }
 
-        public async Task<IList<LocationModel>> GetLocations(long cityId)
+        //Needs Refactoring
+        public async Task<IList<LocationModel>> GetLocations(long cityId, long locationTypeId)
         {
-            var result = await dbContext.Locations.Where(x => x.CityId == cityId)
-                                                   .OrderByDescending(x => x.Votes)
-                                                   .ThenBy(x => x.LocationName)
-                                                   .ToListAsync();
+            try
+            {
+                List<Location> result;
+                if (locationTypeId == 0)
+                    result = await dbContext.Locations.Where(x => x.CityId == cityId)
+                                                        .OrderByDescending(x => x.Votes)
+                                                        .ThenBy(x => x.LocationName)
+                                                        .ToListAsync();
+                else
+                    result = await dbContext.Locations.Where(x => x.CityId == cityId && x.LocationTypeId == locationTypeId)
+                                                       .OrderByDescending(x => x.Votes)
+                                                       .ThenBy(x => x.LocationName)
+                                                       .ToListAsync();
 
-            return mapper.Map<List<Location>, List<LocationModel>>(result);
+                return mapper.Map<List<Location>, List<LocationModel>>(result);
+            }
+            catch(Exception ex)
+            {
+                logger.LogError("Failed to Get Location", ex);
+                return null;
+            }
         }
     }
 }

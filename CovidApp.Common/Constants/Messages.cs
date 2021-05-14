@@ -24,5 +24,8 @@ namespace CovidApp.Common.Constants
         public const string NoMedicalShopsFound = "No Medical Shops found having stock of this medicine";
         //Oxygen
         public const string NoOxygenFound = "No Oxygen found";
+        //Doctor
+        public const string NoDoctorsFound = "No Doctors Found";
+
     }
 }
