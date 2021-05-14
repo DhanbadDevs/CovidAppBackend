@@ -12,27 +12,23 @@ namespace CovidApp.Persistance.AutoMapping
         public AutoMapping()
         {
             CreateMap<VaccinationCentre, VaccinationCentreModel>();
-            CreateMap<VaccinationCentreModel, VaccinationCentre>().ForMember(x => x.Location, opt => opt.Ignore())
-                                                                  .ForMember(x => x.City, opt => opt.Ignore());
+            CreateMap<VaccinationCentreModel, VaccinationCentre>();
             CreateMap<Location, LocationModel>();
-            CreateMap<LocationModel, Location>().ForMember(x => x.LocationType, opt => opt.Ignore())
-                                                .ForMember(x => x.City, opt => opt.Ignore());
+            CreateMap<LocationModel, Location>();
             CreateMap<LocationType, LocationTypeModel>();
             CreateMap<LocationTypeModel, LocationType>();
             CreateMap<City, CityModel>();
             CreateMap<Ambulance, AmbulanceModel>();
             CreateMap<AmbulanceModel, Ambulance>();
             CreateMap<CityModel, City>();
-            CreateMap<HospitalBedModel, HospitalBed>().ForMember(x => x.City, opt => opt.Ignore())
-                                                       .ForMember(x => x.Location, opt => opt.Ignore());
+            CreateMap<HospitalBedModel, HospitalBed>();
             CreateMap<HospitalBed, HospitalBedModel>();
             CreateMap<MedicineEquipment, MedicineEquipmentModel>();
-            CreateMap<MedicineEquipmentModel, MedicineEquipment>().ForMember(x => x.Location, opt => opt.Ignore());
+            CreateMap<MedicineEquipmentModel, MedicineEquipment>();
             CreateMap<MedicineEquipmentMaster, MedicineEquipmentMasterModel>();
             CreateMap<MedicineEquipmentMasterModel, MedicineEquipmentMaster>();
             CreateMap<Doctor, DoctorModel>();
-            CreateMap<DoctorModel, Doctor>().ForMember(x => x.Location, opt => opt.Ignore())
-                                            .ForMember(x => x.City, opt => opt.Ignore());
+            CreateMap<DoctorModel, Doctor>();
 
         }
     }

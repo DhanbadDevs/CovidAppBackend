@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CovidApp.Controllers
 {
+    [ApiController]
     [Route("api/ambulance")]
     public class AmbulanceController:Controller
     {

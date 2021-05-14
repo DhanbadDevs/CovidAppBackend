@@ -46,8 +46,13 @@ namespace CovidApp.Persistance
         {
             try
             {
-                var results = await dbContext.Doctors.Where(x => x.CityId == cityId)
-                                                .OrderByDescending(x => x.IsVerified)
+                IQueryable<Doctor> query = dbContext.Doctors;
+                if(cityId != 0)
+                {
+                    query = query.Where(x => x.CityId == cityId);
+                }
+
+                var results = await query.OrderByDescending(x => x.IsVerified)
                                                 .ThenByDescending(x => x.Votes)
                                                 .ToListAsync();
 

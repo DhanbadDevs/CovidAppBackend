@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CovidApp.Controllers
 {
+    [ApiController]
     [Route("api/master")]
     public class MasterController:Controller
     {

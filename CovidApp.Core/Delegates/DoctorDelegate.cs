@@ -14,7 +14,7 @@ namespace CovidApp.Core.Delegates
     {
         readonly IDoctorService doctorService;
 
-        public DoctorDelegate(DoctorService doctorService)
+        public DoctorDelegate(IDoctorService doctorService)
         {
             this.doctorService = doctorService;
         }
