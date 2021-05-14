@@ -17,10 +17,17 @@ namespace CovidApp.Core.Delegates
         {
             this.masterService = masterService;
         }
-        public async Task<Tuple<ServerResponse<CityModel>>> AddCity(CityModel cityModel)
+        public async Task<ServerResponse<CityModel>> AddCity(CityModel cityModel)
         {
+            if (cityModel == null || String.IsNullOrWhiteSpace(cityModel.CityName) || String.IsNullOrWhiteSpace(cityModel.State)
+                || cityModel.CreatedOn == null)
+                return new ServerResponse<CityModel> { Message = Messages.InvalidInput };
+
             var city = await masterService.AddCity(cityModel);
-            return Tuple.Create(new ServerResponse<CityModel> { Message = Messages.OperationSuccessful, Payload = city.Item1 });
+
+            if (city == null)
+                return new ServerResponse<CityModel> { Message = Messages.ErrorOccured };
+            return new ServerResponse<CityModel> { Message = Messages.OperationSuccessful, Payload = city };
         }
 
         public async Task<ServerResponse<LocationModel>> AddLocation(LocationModel locationModel)

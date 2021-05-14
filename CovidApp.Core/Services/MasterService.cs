@@ -17,7 +17,7 @@ namespace CovidApp.Core.Services
             this.masterRepository = masterRepository;
         }
 
-        public async Task<Tuple<CityModel>> AddCity(CityModel cityModel)
+        public async Task<CityModel> AddCity(CityModel cityModel)
         {
             return await masterRepository.AddCity(cityModel);
         }

@@ -9,7 +9,7 @@ namespace CovidApp.Persistance.API
     public interface IMasterRepository
     {
         Task<IList<CityModel>> GetCities();
-        Task<Tuple<CityModel>> AddCity(CityModel cityModel);
+        Task<CityModel> AddCity(CityModel cityModel);
         Task<IList<LocationModel>> GetLocations(long cityId);
         Task<LocationModel> AddLocation(LocationModel locationModel);
     }

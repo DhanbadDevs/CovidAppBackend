@@ -58,6 +58,9 @@ namespace CovidApp.Extensions
             services.AddScoped<IMedicineEquipmentRepository, MedicineEquipmentRepository>();
             services.AddScoped<IMedicineEquipmentService, MedicineEquipmentService>();
             services.AddScoped<IMedicineEquipmentDelegate, MedicineEquipmentDelegate>();
+            services.AddScoped<IOxygenRepository, OxygenRepository>();
+            services.AddScoped<IOxygenService, OxygenService>();
+            services.AddScoped<IOxygenDelegate, OxygenDelegate>();
         }
     }
 }
