@@ -23,6 +23,9 @@ namespace CovidApp.Persistance.AutoMapping
             CreateMap<Ambulance, AmbulanceModel>();
             CreateMap<AmbulanceModel, Ambulance>();
             CreateMap<CityModel, City>();
+            CreateMap<Doctor, DoctorModel>();
+            CreateMap<DoctorModel, Doctor>().ForMember(x => x.Location, opt => opt.Ignore())
+                                            .ForMember(x => x.City, opt => opt.Ignore());
 
         }
     }
