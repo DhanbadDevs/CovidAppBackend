@@ -26,44 +26,42 @@ namespace CovidApp.Persistance
             this.mapper = mapper;
         }
 
-        public async Task<Tuple<AmbulanceModel>> AddAmbulance(AmbulanceModel ambulanceModel)
-        {
-            /*var ambulance = new Ambulance {
-                AmbulanceName=ambulanceModel.AmbulanceName,
-                IsAirConditioned=ambulanceModel.IsAirConditioned,
-                OxygenAvailable=ambulanceModel.OxygenAvailable,
-                ProvidesOutstationService=ambulanceModel.ProvidesOutstationService,
-                AcceptsCovidPatient = ambulanceModel.AcceptsCovidPatient,
-                Charges = ambulanceModel.Charges,
-                IsVerified = ambulanceModel.IsVerified,
-                Timing = ambulanceModel.Timing,
-                Notes = ambulanceModel.Notes,
-                UpdatedOn=ambulanceModel.UpdatedOn,
-                Phone=ambulanceModel.Phone,
-                Votes=ambulanceModel.Votes,
-                CreatedOn=ambulanceModel.CreatedOn,
-                CityId=ambulanceModel.CityId
-            };*/
-           
-            var ambulance =mapper.Map<AmbulanceModel, Ambulance>(ambulanceModel);
-            await dbContext.Ambulances.AddAsync(ambulance);
-            await dbContext.SaveChangesAsync();
-            return Tuple.Create(ambulanceModel);
-        }
-
-        public async Task<IList<AmbulanceModel>> GetAmbulances()
+        public async Task<AmbulanceModel> AddAmbulance(AmbulanceModel ambulanceModel)
         {
             try
             {
-                var results = await dbContext.Ambulances
+                var ambulance = mapper.Map<AmbulanceModel, Ambulance>(ambulanceModel);
+                await dbContext.Ambulances.AddAsync(ambulance);
+                await dbContext.SaveChangesAsync();
+                return ambulanceModel;
+            }
+            catch(Exception ex)
+            {
+                logger.LogError("Failed to Add Ambulance", ex);
+                return null;
+            }
+
+        }
+
+        public async Task<IList<AmbulanceModel>> GetAmbulances(int cityId)
+        {
+            try
+            {
+                var ambulance = await dbContext.Ambulances
+                                            .Where(x => x.CityId == cityId)
                                             .Include(x => x.City)
                                             .OrderByDescending(x => x.IsVerified)
                                             .ToListAsync();
-                return mapper.Map<List<Ambulance>, List<AmbulanceModel>>(results);
+                ambulance = ambulance.GroupBy(x => x.CityId)
+                                            .Select(x => x.OrderByDescending(y => y.UpdatedOn).FirstOrDefault())
+                                            .OrderByDescending(x => x.IsVerified)
+                                            .ThenByDescending(x => x.Votes)
+                                            .ToList();
+                return mapper.Map<List<Ambulance>, List<AmbulanceModel>>(ambulance);
             }
             catch (Exception ex)
             {
-                logger.LogError("Failed to Get Vaccine", ex);
+                logger.LogError("Failed to Get Ambulance", ex);
                 return null;
             }
         }

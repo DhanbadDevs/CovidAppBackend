@@ -21,13 +21,13 @@ namespace CovidApp.Controllers
         {
             _logger = logger;
             this.ambulanceDelegate = ambulanceDelegate;
-            _logger.LogDebug(1, "NLog injected into AmbulanceController");
+            _logger.LogDebug(1, "NLog injected into Ambulance Controller");
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAmbulance()
+        public async Task<IActionResult> GetAmbulance([FromQuery] int cityId)
         {
-            var response = await ambulanceDelegate.GetAmbulances();
+            var response = await ambulanceDelegate.GetAmbulances(cityId);
             return Ok(response);
         }
 
@@ -36,7 +36,7 @@ namespace CovidApp.Controllers
         {
             var response = await ambulanceDelegate.AddAmbulance(ambulanceModel);
             
-                return StatusCode(StatusCodes.Status201Created, response.Item1);
+                return StatusCode(StatusCodes.Status201Created, response);
            
         }
     }

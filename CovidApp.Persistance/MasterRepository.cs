@@ -26,14 +26,14 @@ namespace CovidApp.Persistance
             this.mapper = mapper;
         }
 
-        public async Task<Tuple<CityModel>> AddCity(CityModel cityModel)
+        public async Task<CityModel> AddCity(CityModel cityModel)
         {
             try
             {
                 var city = mapper.Map<CityModel, City>(cityModel);
                 await dbContext.AddAsync(city);
                 await dbContext.SaveChangesAsync();
-                return Tuple.Create(cityModel);
+                return cityModel;
             }
             catch (Exception ex)
             {

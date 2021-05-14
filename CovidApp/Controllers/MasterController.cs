@@ -33,7 +33,7 @@ namespace CovidApp.Controllers
         {
             var response = await masterDelegate.AddCity(cityModel);
 
-            return StatusCode(StatusCodes.Status201Created, response.Item1);
+            return StatusCode(StatusCodes.Status201Created, response);
 
         }
 

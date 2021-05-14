@@ -19,7 +19,7 @@ namespace CovidApp.Persistance.AutoMapping
             CreateMap<LocationTypeModel, LocationType>();
             CreateMap<City, CityModel>();
             CreateMap<Ambulance, AmbulanceModel>();
-            CreateMap<AmbulanceModel, Ambulance>();
+            CreateMap<AmbulanceModel, Ambulance>().ForMember(x => x.City, opt => opt.Ignore()); 
             CreateMap<CityModel, City>();
             CreateMap<HospitalBedModel, HospitalBed>();
             CreateMap<HospitalBed, HospitalBedModel>();
@@ -29,6 +29,10 @@ namespace CovidApp.Persistance.AutoMapping
             CreateMap<MedicineEquipmentMasterModel, MedicineEquipmentMaster>();
             CreateMap<Doctor, DoctorModel>();
             CreateMap<DoctorModel, Doctor>();
+
+
+            CreateMap<OxygenModel, Oxygen>();
+            CreateMap<Oxygen, OxygenModel>();
 
         }
     }
