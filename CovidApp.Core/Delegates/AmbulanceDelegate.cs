@@ -29,9 +29,9 @@ namespace CovidApp.Core.Delegates
             return new ServerResponse<AmbulanceModel> { Message = Messages.OperationSuccessful,Payload=ambulance };
         }
 
-        public async Task<ServerResponse<IList<AmbulanceModel>>> GetAmbulances()
+        public async Task<ServerResponse<IList<AmbulanceModel>>> GetAmbulances(int cityid)
         {
-            var result = await ambulanceService.GetAmbulances();
+            var result = await ambulanceService.GetAmbulances(cityid);
             if (result == null)
                 return new ServerResponse<IList<AmbulanceModel>> { Message = Messages.ErrorOccured };
             else if (!result.Any())

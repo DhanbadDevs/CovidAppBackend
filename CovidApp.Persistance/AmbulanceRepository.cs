@@ -43,15 +43,21 @@ namespace CovidApp.Persistance
 
         }
 
-        public async Task<IList<AmbulanceModel>> GetAmbulances()
+        public async Task<IList<AmbulanceModel>> GetAmbulances(int cityId)
         {
             try
             {
-                var results = await dbContext.Ambulances
+                var ambulance = await dbContext.Ambulances
+                                            .Where(x => x.CityId == cityId)
                                             .Include(x => x.City)
                                             .OrderByDescending(x => x.IsVerified)
                                             .ToListAsync();
-                return mapper.Map<List<Ambulance>, List<AmbulanceModel>>(results);
+                ambulance = ambulance.GroupBy(x => x.CityId)
+                                            .Select(x => x.OrderByDescending(y => y.UpdatedOn).FirstOrDefault())
+                                            .OrderByDescending(x => x.IsVerified)
+                                            .ThenByDescending(x => x.Votes)
+                                            .ToList();
+                return mapper.Map<List<Ambulance>, List<AmbulanceModel>>(ambulance);
             }
             catch (Exception ex)
             {

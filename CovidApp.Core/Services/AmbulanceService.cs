@@ -22,9 +22,9 @@ namespace CovidApp.Core.Services
             return await ambulanceRepository.AddAmbulance(ambulanceModel);
         }
 
-        public async Task<IList<AmbulanceModel>> GetAmbulances()
+        public async Task<IList<AmbulanceModel>> GetAmbulances(int cityId)
         {
-            return await ambulanceRepository.GetAmbulances();
+            return await ambulanceRepository.GetAmbulances(cityId);
         }
     }
 }

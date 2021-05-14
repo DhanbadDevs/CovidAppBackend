@@ -19,5 +19,6 @@ namespace CovidApp.Model
         public int Votes { get; set; }
         public DateTime CreatedOn { get; set; }
         public long CityId { get; set; }
+        public CityModel City{ get; set; }
     }
 }

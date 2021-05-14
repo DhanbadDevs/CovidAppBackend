@@ -24,9 +24,9 @@ namespace CovidApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAmbulance()
+        public async Task<IActionResult> GetAmbulance([FromQuery] int cityId)
         {
-            var response = await ambulanceDelegate.GetAmbulances();
+            var response = await ambulanceDelegate.GetAmbulances(cityId);
             return Ok(response);
         }
 

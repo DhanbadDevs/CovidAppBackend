@@ -7,7 +7,7 @@ namespace CovidApp.Core.API.Services
 {
     public interface IAmbulanceService
     {
-        Task<IList<AmbulanceModel>> GetAmbulances();
+        Task<IList<AmbulanceModel>> GetAmbulances(int cityId);
         Task<AmbulanceModel> AddAmbulance(AmbulanceModel ambulanceModel);
     }
 }
