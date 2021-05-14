@@ -33,8 +33,10 @@ namespace CovidApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(c => c.AddProfile<AutoMapping>(), typeof(Startup));
+            services.AddCors();
             services.ConfigureMvc();
             services.AddControllers();
+
 
             var builder = new SqlConnectionStringBuilder(
                                 Configuration.GetConnectionString("CovidAppDatabase"));
@@ -65,6 +67,12 @@ namespace CovidApp
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true)
+                .AllowCredentials());
 
             app.UseAuthorization();
 

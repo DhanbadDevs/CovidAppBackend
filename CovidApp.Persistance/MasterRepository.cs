@@ -73,9 +73,16 @@ namespace CovidApp.Persistance
             }
         }
 
-        public async Task<IList<LocationModel>> GetLocations(long cityId)
+        public async Task<IList<LocationModel>> GetLocations(long cityId, long locationTypeId)
         {
-            var result = await dbContext.Locations.Where(x => x.CityId == cityId)
+            List<Location> result;
+            if(locationTypeId == 0)
+               result =  await dbContext.Locations.Where(x => x.CityId == cityId)
+                                                   .OrderByDescending(x => x.Votes)
+                                                   .ThenBy(x => x.LocationName)
+                                                   .ToListAsync();
+            else
+                result = await dbContext.Locations.Where(x => x.CityId == cityId && x.LocationTypeId == locationTypeId)
                                                    .OrderByDescending(x => x.Votes)
                                                    .ThenBy(x => x.LocationName)
                                                    .ToListAsync();

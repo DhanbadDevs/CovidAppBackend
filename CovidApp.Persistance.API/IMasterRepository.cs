@@ -10,7 +10,7 @@ namespace CovidApp.Persistance.API
     {
         Task<IList<CityModel>> GetCities();
         Task<Tuple<CityModel>> AddCity(CityModel cityModel);
-        Task<IList<LocationModel>> GetLocations(long cityId);
+        Task<IList<LocationModel>> GetLocations(long cityId, long locationTypeId);
         Task<LocationModel> AddLocation(LocationModel locationModel);
     }
 }

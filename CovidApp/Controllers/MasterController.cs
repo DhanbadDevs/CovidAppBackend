@@ -3,6 +3,7 @@ using CovidApp.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace CovidApp.Controllers
@@ -36,9 +37,9 @@ namespace CovidApp.Controllers
         }
 
         [HttpGet("location")]
-        public async Task<IActionResult> GetLocations(long cityId)
+        public async Task<IActionResult> GetLocations([Required]long cityId, long locationTypeId)
         {
-            var response = await masterDelegate.GetLocations(cityId);
+            var response = await masterDelegate.GetLocations(cityId, locationTypeId);
             return Ok(response);
         }
 

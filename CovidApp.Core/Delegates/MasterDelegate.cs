@@ -47,9 +47,9 @@ namespace CovidApp.Core.Delegates
 
         }
 
-        public async Task<ServerResponse<IList<LocationModel>>> GetLocations(long cityId)
+        public async Task<ServerResponse<IList<LocationModel>>> GetLocations(long cityId, long locationTypeId)
         {
-            var result = await masterService.GetLocations(cityId);
+            var result = await masterService.GetLocations(cityId, locationTypeId);
             if (result == null)
                 return new ServerResponse<IList<LocationModel>> { Message = Messages.NoLocationFound };
             else

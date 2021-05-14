@@ -32,9 +32,9 @@ namespace CovidApp.Core.Services
             return await masterRepository.GetCities();    
         }
 
-        public async Task<IList<LocationModel>> GetLocations(long cityId)
+        public async Task<IList<LocationModel>> GetLocations(long cityId, long locationTypeId)
         {
-            return await masterRepository.GetLocations(cityId);
+            return await masterRepository.GetLocations(cityId, locationTypeId);
         }
     }
 }
