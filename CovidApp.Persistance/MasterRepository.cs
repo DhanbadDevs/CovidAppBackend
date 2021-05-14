@@ -47,7 +47,7 @@ namespace CovidApp.Persistance
             try
             {
                 var location = mapper.Map<LocationModel, Location>(locationModel);
-                await dbContext.AddAsync(location);
+                await dbContext.Locations.AddAsync(location);
                 await dbContext.SaveChangesAsync();
                 return locationModel;
             }
