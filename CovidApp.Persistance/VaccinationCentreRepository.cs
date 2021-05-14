@@ -15,7 +15,7 @@ namespace CovidApp.Persistance
 {
     public class VaccinationCentreRepository : IVaccinationCentreRepository
     {
-       readonly CovidAppDbContext dbContext;
+        readonly CovidAppDbContext dbContext;
         readonly ILogger<VaccinationCentreRepository> logger;
         readonly IMapper mapper;
 
@@ -31,22 +31,23 @@ namespace CovidApp.Persistance
             try
             {
                 var vaccinationCentre = mapper.Map<VaccinationCentreModel, VaccinationCentre>(vaccinationCentreModel);
-                await dbContext.AddAsync(vaccinationCentre);
+                await dbContext.VaccinationCentres.AddAsync(vaccinationCentre);
                 await dbContext.SaveChangesAsync();
                 return vaccinationCentreModel;
             }
             catch (Exception ex)
             {
-                logger.LogError("Failed to Add Vaccination Centre", ex);
+                logger.LogError("Faild to Add Vaccination Centre", ex);
                 return null;
             }
         }
 
-        public async Task<IList<VaccinationCentreModel>> GetVaccinationCentre()
+        public async Task<IList<VaccinationCentreModel>> GetVaccinationCentre(int cityId)
         {
             try
             {
                 var results = await dbContext.VaccinationCentres
+                                            .Where(x => x.CityId == cityId)
                                             .Include(x => x.Location)
                                             .OrderByDescending(x => x.IsAvailable)
                                             .ToListAsync();

@@ -4,6 +4,7 @@ using CovidApp.Core.API.Services;
 using CovidApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,12 +33,14 @@ namespace CovidApp.Core.Delegates
             return new ServerResponse<VaccinationCentreModel> { Message = Messages.OperationSuccessful, Payload = result };
         }
 
-        public async Task<ServerResponse<IList<VaccinationCentreModel>>> GetVaccinationCentre()
+        public async Task<ServerResponse<IList<VaccinationCentreModel>>> GetVaccinationCentre(int cityId)
         {
-            var result = await vaccinationCentreService.GetVaccinationCentre();
+            var result = await vaccinationCentreService.GetVaccinationCentre(cityId);
 
             if (result == null)
-                return new ServerResponse<IList<VaccinationCentreModel>> { Message = Messages.NoVaccinationCentreFound };
+                return new ServerResponse<IList<VaccinationCentreModel>> { Message = Messages.ErrorOccured };
+            else if (!result.Any())
+                return new ServerResponse<IList<VaccinationCentreModel>> { Message = Messages.NoHospitalBedsFound };
             else
                 return new ServerResponse<IList<VaccinationCentreModel>> { Message = Messages.OperationSuccessful, Payload = result };
         }

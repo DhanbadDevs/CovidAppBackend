@@ -8,7 +8,7 @@ namespace CovidApp.Core.API.Delegates
 {
     public interface IOxygenDelegate
     {
-        Task<ServerResponse<IList<OxygenModel>>> GetOxygen();
+        Task<ServerResponse<IList<OxygenModel>>> GetAllOxygen(int cityId);
         Task<ServerResponse<OxygenModel>> AddOxygen(OxygenModel oxygenModel);
     }
 }

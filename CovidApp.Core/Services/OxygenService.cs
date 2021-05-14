@@ -1,5 +1,6 @@
 ﻿using CovidApp.Core.API.Services;
 using CovidApp.Model;
+using CovidApp.Persistance.API;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,14 +10,19 @@ namespace CovidApp.Core.Services
 {
     public class OxygenService : IOxygenService
     {
-        public Task<OxygenModel> AddOxygen(OxygenModel oxygenModel)
+        readonly IOxygenRepository oxygenRepository;
+        public OxygenService(IOxygenRepository oxygenRepository)
         {
-            throw new NotImplementedException();
+            this.oxygenRepository = oxygenRepository;
+        }
+        public async Task<OxygenModel> AddOxygen(OxygenModel oxygenModel)
+        {
+            return await oxygenRepository.AddOxygen(oxygenModel);
         }
 
-        public Task<IList<OxygenModel>> GetOxygens()
+        public async Task<IList<OxygenModel>> GetOxygens(int cityId)
         {
-            throw new NotImplementedException();
+            return await oxygenRepository.GetOxygens(cityId);
         }
     }
 }

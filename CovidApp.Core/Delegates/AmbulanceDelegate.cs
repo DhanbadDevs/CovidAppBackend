@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CovidApp.Common.Constants;
@@ -32,6 +33,8 @@ namespace CovidApp.Core.Delegates
         {
             var result = await ambulanceService.GetAmbulances();
             if (result == null)
+                return new ServerResponse<IList<AmbulanceModel>> { Message = Messages.ErrorOccured };
+            else if (!result.Any())
                 return new ServerResponse<IList<AmbulanceModel>> { Message = Messages.NoAmbulanceFound };
             else
                 return new ServerResponse<IList<AmbulanceModel>> { Message = Messages.OperationSuccessful, Payload = result };

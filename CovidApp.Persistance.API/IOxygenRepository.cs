@@ -8,7 +8,7 @@ namespace CovidApp.Persistance.API
 {
     public interface IOxygenRepository
     {
-        Task<IList<OxygenModel>> GetOxygens();
+        Task<IList<OxygenModel>> GetOxygens(int cityId);
         Task<OxygenModel> AddOxygen(OxygenModel oxygenModel);
         
     }

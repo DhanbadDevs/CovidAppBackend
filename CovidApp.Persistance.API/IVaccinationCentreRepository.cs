@@ -8,7 +8,7 @@ namespace CovidApp.Persistance.API
 {
     public interface IVaccinationCentreRepository
     {
-        Task<IList<VaccinationCentreModel>> GetVaccinationCentre();
+        Task<IList<VaccinationCentreModel>> GetVaccinationCentre(int cityId);
         Task<VaccinationCentreModel> AddVaccinationCentre(VaccinationCentreModel vaccinationCentreModel);
     }
 }

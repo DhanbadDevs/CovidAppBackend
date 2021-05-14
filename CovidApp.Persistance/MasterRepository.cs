@@ -28,18 +28,17 @@ namespace CovidApp.Persistance
 
         public async Task<CityModel> AddCity(CityModel cityModel)
         {
-            try
+            /*var city = new City
             {
-                var city = mapper.Map<CityModel, City>(cityModel);
-                await dbContext.AddAsync(city);
-                await dbContext.SaveChangesAsync();
-                return cityModel;
-            }
-            catch(Exception ex)
-            {
-                logger.LogError("Failed to Add City", ex);
-                return null;
-            }
+                CityName = cityModel.CityName,
+                UpdatedOn = cityModel.UpdatedOn,
+                CreatedOn = cityModel.CreatedOn,
+                State=cityModel.State
+            };*/
+            var city = mapper.Map<CityModel, City>(cityModel);
+            await dbContext.Cities.AddAsync(city);
+            await dbContext.SaveChangesAsync();
+            return (cityModel);
         }
 
         public async Task<LocationModel> AddLocation(LocationModel locationModel)
@@ -47,7 +46,7 @@ namespace CovidApp.Persistance
             try
             {
                 var location = mapper.Map<LocationModel, Location>(locationModel);
-                await dbContext.AddAsync(location);
+                await dbContext.Locations.AddAsync(location);
                 await dbContext.SaveChangesAsync();
                 return locationModel;
             }

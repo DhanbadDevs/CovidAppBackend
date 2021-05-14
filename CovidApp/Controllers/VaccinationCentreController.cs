@@ -23,9 +23,9 @@ namespace CovidApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetVaccinationCentres()
+        public async Task<IActionResult> GetVaccinationCentres([FromQuery] int cityId)
         {
-            var response = await vaccinationCentreDelegate.GetVaccinationCentre();
+            var response = await vaccinationCentreDelegate.GetVaccinationCentre(cityId);
             return Ok(response);
         }
 
