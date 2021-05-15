@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
@@ -12,14 +10,20 @@ namespace CovidApp.Persistance.Entities
     {
         [Key]
         public long Id { get; set; }
-        [Required]
         [StringLength(200)]
-        public string BedType { get; set; }
-        public int? BedCount { get; set; }
+        public string WithoutOxygen { get; set; }
+        [StringLength(200)]
+        public string WithOxygen { get; set; }
+        [StringLength(200)]
+        public string IcuWithoutVentilator { get; set; }
+        [StringLength(200)]
+        public string IcuWithVentilator { get; set; }
         public long CityId { get; set; }
         [StringLength(50)]
         public string Charges { get; set; }
         public long LocationId { get; set; }
+        [StringLength(500)]
+        public string BookingLink { get; set; }
         public bool IsVerified { get; set; }
         [StringLength(500)]
         public string Notes { get; set; }

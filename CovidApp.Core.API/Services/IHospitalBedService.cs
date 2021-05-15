@@ -8,7 +8,7 @@ namespace CovidApp.Core.API.Services
 {
     public interface IHospitalBedService
     {
-        Task<IList<HospitalBedModel>> GetHospitalBeds(string bedType, int cityId);
+        Task<IList<HospitalBedModel>> GetHospitalBeds(int cityId);
         Task<HospitalBedModel> AddOrUpdateHospitalBed(HospitalBedModel hospitalBedModel);
     }
 }

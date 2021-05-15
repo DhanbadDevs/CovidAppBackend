@@ -22,9 +22,9 @@ namespace CovidApp.Core.Services
             return await hospitalBedRepository.AddOrUpdateHospitalBed(hospitalBedModel);
         }
 
-        public async Task<IList<HospitalBedModel>> GetHospitalBeds(string bedType, int cityId)
+        public async Task<IList<HospitalBedModel>> GetHospitalBeds( int cityId)
         {
-            return await hospitalBedRepository.GetHospitalBeds(bedType, cityId);
+            return await hospitalBedRepository.GetHospitalBeds(cityId);
         }
     }
 }

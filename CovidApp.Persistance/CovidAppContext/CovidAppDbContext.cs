@@ -134,9 +134,13 @@ namespace CovidApp.Persistance.CovidAppContext
 
             modelBuilder.Entity<HospitalBed>(entity =>
             {
-                entity.Property(e => e.BedType).IsUnicode(false);
+                entity.Property(e => e.BookingLink).IsUnicode(false);
 
                 entity.Property(e => e.Charges).IsUnicode(false);
+
+                entity.Property(e => e.IcuWithVentilator).IsUnicode(false);
+
+                entity.Property(e => e.IcuWithoutVentilator).IsUnicode(false);
 
                 entity.Property(e => e.Notes).IsUnicode(false);
 
@@ -145,6 +149,10 @@ namespace CovidApp.Persistance.CovidAppContext
                 entity.Property(e => e.UpdatedOn).HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Votes).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.WithOxygen).IsUnicode(false);
+
+                entity.Property(e => e.WithoutOxygen).IsUnicode(false);
 
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.HospitalBeds)
