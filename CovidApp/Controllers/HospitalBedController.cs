@@ -24,9 +24,9 @@ namespace CovidApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetHospitalBeds([FromQuery] string bedType, [FromQuery] int cityId)
+        public async Task<IActionResult> GetHospitalBeds([FromQuery] int cityId)
         {
-            var response = await hospitalBedDelegate.GetHospitalBeds(bedType, cityId);
+            var response = await hospitalBedDelegate.GetHospitalBeds(cityId);
             return Ok(response);
         }
 
