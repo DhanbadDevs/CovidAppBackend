@@ -11,11 +11,6 @@ namespace CovidApp.Persistance.Entities
     [Table("HelplineCategory")]
     public partial class HelplineCategory
     {
-        public HelplineCategory()
-        {
-            Helplines = new HashSet<Helpline>();
-        }
-
         [Key]
         public long Id { get; set; }
         [Required]
@@ -25,8 +20,5 @@ namespace CovidApp.Persistance.Entities
         public DateTime? UpdatedOn { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime CreatedOn { get; set; }
-
-        [InverseProperty(nameof(Helpline.HelplineCategory))]
-        public virtual ICollection<Helpline> Helplines { get; set; }
     }
 }

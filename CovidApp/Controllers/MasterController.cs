@@ -52,5 +52,20 @@ namespace CovidApp.Controllers
             return StatusCode(StatusCodes.Status201Created, response);
 
         }
+
+        [HttpGet("helplines")]
+        public async Task<IActionResult> GetHelplines([Required] long cityId)
+        {
+            var response = await masterDelegate.GetHelpline(cityId);
+            return Ok(response);
+        }
+
+        [HttpPost("helplines")]
+        public async Task<IActionResult> AddHelpline([FromBody] HelplineModel helplineModel)
+        {
+            var response = await masterDelegate.AddHelpline(helplineModel);
+            return StatusCode(StatusCodes.Status201Created, response);
+
+        }
     }
 }

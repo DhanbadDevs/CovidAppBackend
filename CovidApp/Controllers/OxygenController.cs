@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CovidApp.Controllers
 {
+    [ApiController]
     [Route("api/oxygen")]
     public class OxygenController:Controller
     {

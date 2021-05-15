@@ -15,6 +15,7 @@ namespace CovidApp.Persistance.Entities
         {
             Ambulances = new HashSet<Ambulance>();
             Doctors = new HashSet<Doctor>();
+            Helplines = new HashSet<Helpline>();
             HospitalBeds = new HashSet<HospitalBed>();
             Locations = new HashSet<Location>();
             MedicineEquipments = new HashSet<MedicineEquipment>();
@@ -41,6 +42,8 @@ namespace CovidApp.Persistance.Entities
         public virtual ICollection<Ambulance> Ambulances { get; set; }
         [InverseProperty(nameof(Doctor.City))]
         public virtual ICollection<Doctor> Doctors { get; set; }
+        [InverseProperty(nameof(Helpline.City))]
+        public virtual ICollection<Helpline> Helplines { get; set; }
         [InverseProperty(nameof(HospitalBed.City))]
         public virtual ICollection<HospitalBed> HospitalBeds { get; set; }
         [InverseProperty(nameof(Location.City))]

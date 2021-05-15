@@ -30,6 +30,19 @@ namespace CovidApp.Core.Delegates
             return new ServerResponse<CityModel> { Message = Messages.OperationSuccessful, Payload = city };
         }
 
+        public async Task<ServerResponse<HelplineModel>> AddHelpline(HelplineModel helplineModel)
+        {
+            if (helplineModel == null || String.IsNullOrWhiteSpace(helplineModel.HelplineName) 
+                || (String.IsNullOrWhiteSpace(helplineModel.Phone) && String.IsNullOrWhiteSpace(helplineModel.Link)))
+                return new ServerResponse<HelplineModel> { Message = Messages.InvalidInput };
+
+            var helpline = await masterService.AddHelpline(helplineModel);
+
+            if (helpline == null)
+                return new ServerResponse<HelplineModel> { Message = Messages.ErrorOccured };
+            return new ServerResponse<HelplineModel> { Message = Messages.OperationSuccessful, Payload = helpline };
+        }
+
         public async Task<ServerResponse<LocationModel>> AddLocation(LocationModel locationModel)
         {
             if (locationModel == null || String.IsNullOrWhiteSpace(locationModel.LocationName) || String.IsNullOrWhiteSpace(locationModel.Address)
@@ -54,6 +67,17 @@ namespace CovidApp.Core.Delegates
                 return new ServerResponse<IList<CityModel>> { Message = Messages.NoCityFound };
             else
                 return new ServerResponse<IList<CityModel>> { Message = Messages.OperationSuccessful, Payload = result };
+        }
+
+        public async Task<ServerResponse<IList<HelplineModel>>> GetHelpline(long cityId)
+        {
+            IList<HelplineModel> result = await masterService.GetHelpline(cityId);
+            if (result == null)
+                return new ServerResponse<IList<HelplineModel>> { Message = Messages.ErrorOccured };
+            else if (!result.Any())
+                return new ServerResponse<IList<HelplineModel>> { Message = Messages.NoHelplinesFound };
+            else
+                return new ServerResponse<IList<HelplineModel>> { Message = Messages.OperationSuccessful, Payload = result };
         }
 
         public async Task<ServerResponse<IList<LocationModel>>> GetLocations(long cityId, long locationTypeId)

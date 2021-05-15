@@ -42,6 +42,22 @@ namespace CovidApp.Persistance
             }
         }
 
+        public async Task<HelplineModel> AddHelpline(HelplineModel helplineModel)
+        {
+            try
+            {
+                var helpline = mapper.Map<HelplineModel, Helpline>(helplineModel);
+                await dbContext.AddAsync(helpline);
+                await dbContext.SaveChangesAsync();
+                return mapper.Map<Helpline, HelplineModel>(helpline);
+            }
+            catch(Exception ex)
+            {
+                logger.LogError("Failed to Add Helpline", ex);
+                return null;
+            }
+        }
+
         public async Task<LocationModel> AddLocation(LocationModel locationModel)
         {
             try
@@ -72,6 +88,14 @@ namespace CovidApp.Persistance
                 logger.LogError("Failed to Get Cities", ex);
                 return null;
             }
+        }
+
+        public async Task<IList<HelplineModel>> GetHelpline(long cityId)
+        {
+            var result = await dbContext.Helplines
+                                           .Where(x => x.CityId == cityId || cityId == 0)
+                                           .ToListAsync();
+            return mapper.Map<List<Helpline>, List<HelplineModel>>(result);
         }
 
         //Needs Refactoring
