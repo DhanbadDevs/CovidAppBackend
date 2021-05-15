@@ -108,6 +108,8 @@ namespace CovidApp.Persistance.CovidAppContext
             {
                 entity.Property(e => e.HelplineName).IsUnicode(false);
 
+                entity.Property(e => e.Link).IsUnicode(false);
+
                 entity.Property(e => e.Notes).IsUnicode(false);
 
                 entity.Property(e => e.Phone).IsUnicode(false);
@@ -118,11 +120,10 @@ namespace CovidApp.Persistance.CovidAppContext
 
                 entity.Property(e => e.Votes).HasDefaultValueSql("((0))");
 
-                entity.HasOne(d => d.HelplineCategory)
+                entity.HasOne(d => d.City)
                     .WithMany(p => p.Helplines)
-                    .HasForeignKey(d => d.HelplineCategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Helpline_HelplineCategory");
+                    .HasForeignKey(d => d.CityId)
+                    .HasConstraintName("FK_Helpline_City");
             });
 
             modelBuilder.Entity<HelplineCategory>(entity =>

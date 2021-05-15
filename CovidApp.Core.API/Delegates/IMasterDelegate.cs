@@ -12,5 +12,7 @@ namespace CovidApp.Core.API.Delegates
         Task<ServerResponse<CityModel>> AddCity(CityModel cityModel);
         Task<ServerResponse<IList<LocationModel>>> GetLocations(long cityId, long locationTypeId);
         Task<ServerResponse<LocationModel>> AddLocation(LocationModel locationModel);
+        Task<ServerResponse<IList<HelplineModel>>> GetHelpline(long cityId);
+        Task<ServerResponse<HelplineModel>> AddHelpline(HelplineModel helplineModel);
     }
 }
