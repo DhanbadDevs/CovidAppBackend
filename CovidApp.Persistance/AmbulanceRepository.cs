@@ -49,14 +49,11 @@ namespace CovidApp.Persistance
             {
                 var ambulance = await dbContext.Ambulances
                                             .Where(x => x.CityId == cityId)
-                                            .Include(x => x.City)
                                             .OrderByDescending(x => x.IsVerified)
+                                            .ThenByDescending(x => x.AcceptsCovidPatient)
+                                            .ThenByDescending(x=> x.OxygenAvailable)
+                                            .ThenByDescending(x => x.ProvidesOutstationService)
                                             .ToListAsync();
-                ambulance = ambulance.GroupBy(x => x.CityId)
-                                            .Select(x => x.OrderByDescending(y => y.UpdatedOn).FirstOrDefault())
-                                            .OrderByDescending(x => x.IsVerified)
-                                            .ThenByDescending(x => x.Votes)
-                                            .ToList();
                 return mapper.Map<List<Ambulance>, List<AmbulanceModel>>(ambulance);
             }
             catch (Exception ex)

@@ -71,6 +71,8 @@ namespace CovidApp.Persistance.CovidAppContext
 
             modelBuilder.Entity<Doctor>(entity =>
             {
+                entity.Property(e => e.Address).IsUnicode(false);
+
                 entity.Property(e => e.Designation).IsUnicode(false);
 
                 entity.Property(e => e.DoctorName).IsUnicode(false);
@@ -100,11 +102,6 @@ namespace CovidApp.Persistance.CovidAppContext
                     .HasForeignKey(d => d.CityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Docter_City");
-
-                entity.HasOne(d => d.Location)
-                    .WithMany(p => p.Doctors)
-                    .HasForeignKey(d => d.LocationId)
-                    .HasConstraintName("FK_Docter_Location");
             });
 
             modelBuilder.Entity<Helpline>(entity =>

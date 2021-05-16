@@ -18,7 +18,6 @@ namespace CovidApp.Persistance.Entities
         public string DoctorName { get; set; }
         [StringLength(50)]
         public string Timing { get; set; }
-        public long? LocationId { get; set; }
         public long CityId { get; set; }
         [StringLength(50)]
         public string Designation { get; set; }
@@ -43,12 +42,11 @@ namespace CovidApp.Persistance.Entities
         public int? Votes { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime CreatedOn { get; set; }
+        [StringLength(500)]
+        public string Address { get; set; }
 
         [ForeignKey(nameof(CityId))]
         [InverseProperty("Doctors")]
         public virtual City City { get; set; }
-        [ForeignKey(nameof(LocationId))]
-        [InverseProperty("Doctors")]
-        public virtual Location Location { get; set; }
     }
 }

@@ -9,7 +9,6 @@ namespace CovidApp.Model
         public long Id { get; set; }
         public string DoctorName { get; set; }
         public string Timing { get; set; }
-        public long LocationId { get; set; }
         public long CityId { get; set; }
         public string Designation { get; set; }
         public string Experience { get; set; }
@@ -23,7 +22,8 @@ namespace CovidApp.Model
         public string Phone { get; set; }
         public int? Votes { get; set; }
         public DateTime CreatedOn { get; set; }
+        public string Address { get; set; }
         public CityModel City { get; set; }
-        public LocationModel Location { get; set; }
+
     }
 }
