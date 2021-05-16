@@ -13,7 +13,6 @@ namespace CovidApp.Persistance.Entities
     {
         public Location()
         {
-            Doctors = new HashSet<Doctor>();
             HospitalBeds = new HashSet<HospitalBed>();
             MedicineEquipments = new HashSet<MedicineEquipment>();
             Ngos = new HashSet<Ngo>();
@@ -56,8 +55,6 @@ namespace CovidApp.Persistance.Entities
         [ForeignKey(nameof(LocationTypeId))]
         [InverseProperty("Locations")]
         public virtual LocationType LocationType { get; set; }
-        [InverseProperty(nameof(Doctor.Location))]
-        public virtual ICollection<Doctor> Doctors { get; set; }
         [InverseProperty(nameof(HospitalBed.Location))]
         public virtual ICollection<HospitalBed> HospitalBeds { get; set; }
         [InverseProperty(nameof(MedicineEquipment.Location))]
