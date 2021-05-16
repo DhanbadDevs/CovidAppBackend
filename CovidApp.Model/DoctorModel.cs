@@ -12,6 +12,8 @@ namespace CovidApp.Model
         public long LocationId { get; set; }
         public long CityId { get; set; }
         public string Designation { get; set; }
+        public string Experience { get; set; }
+        public string Qualification { get; set; }
         public string Medium { get; set; }
         public string Fees { get; set; }
         public bool IsVerified { get; set; }

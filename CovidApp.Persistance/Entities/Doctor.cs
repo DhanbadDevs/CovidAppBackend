@@ -18,17 +18,21 @@ namespace CovidApp.Persistance.Entities
         public string DoctorName { get; set; }
         [StringLength(50)]
         public string Timing { get; set; }
-        public long LocationId { get; set; }
+        public long? LocationId { get; set; }
         public long CityId { get; set; }
         [StringLength(50)]
         public string Designation { get; set; }
+        [StringLength(100)]
+        public string Experience { get; set; }
+        [StringLength(200)]
+        public string Qualification { get; set; }
         [Required]
         [StringLength(50)]
         public string Medium { get; set; }
         [StringLength(50)]
         public string Fees { get; set; }
         public bool IsVerified { get; set; }
-        [StringLength(200)]
+        [StringLength(500)]
         public string MediumLink { get; set; }
         [StringLength(500)]
         public string Notes { get; set; }

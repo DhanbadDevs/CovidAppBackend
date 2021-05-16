@@ -75,6 +75,8 @@ namespace CovidApp.Persistance.CovidAppContext
 
                 entity.Property(e => e.DoctorName).IsUnicode(false);
 
+                entity.Property(e => e.Experience).IsUnicode(false);
+
                 entity.Property(e => e.Fees).IsUnicode(false);
 
                 entity.Property(e => e.Medium).IsUnicode(false);
@@ -84,6 +86,8 @@ namespace CovidApp.Persistance.CovidAppContext
                 entity.Property(e => e.Notes).IsUnicode(false);
 
                 entity.Property(e => e.Phone).IsUnicode(false);
+
+                entity.Property(e => e.Qualification).IsUnicode(false);
 
                 entity.Property(e => e.Timing).IsUnicode(false);
 
@@ -100,7 +104,6 @@ namespace CovidApp.Persistance.CovidAppContext
                 entity.HasOne(d => d.Location)
                     .WithMany(p => p.Doctors)
                     .HasForeignKey(d => d.LocationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Docter_Location");
             });
 

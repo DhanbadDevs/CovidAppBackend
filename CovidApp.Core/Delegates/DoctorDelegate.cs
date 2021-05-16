@@ -21,8 +21,7 @@ namespace CovidApp.Core.Delegates
 
         public async Task<ServerResponse<DoctorModel>> AddDoctor(DoctorModel doctorModel)
         {
-            if (doctorModel == null || String.IsNullOrWhiteSpace(doctorModel.DoctorName) || String.IsNullOrWhiteSpace(doctorModel.Medium) 
-                || doctorModel.LocationId == 0 || doctorModel.CityId == 0 || doctorModel.CreatedOn == null)
+            if (doctorModel == null || String.IsNullOrWhiteSpace(doctorModel.DoctorName) || String.IsNullOrWhiteSpace(doctorModel.Medium) || doctorModel.CityId == 0 || doctorModel.CreatedOn == null)
                 return new ServerResponse<DoctorModel> { Message = Messages.InvalidInput };
 
             var result = await doctorService.AddDoctor(doctorModel);

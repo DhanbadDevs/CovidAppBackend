@@ -31,6 +31,8 @@ namespace CovidApp.Persistance
             try
             {
                 var doctor = mapper.Map<DoctorModel, Doctor>(doctorModel);
+                if (doctor.LocationId == 0)
+                    doctor.LocationId = null;
                 await dbContext.AddAsync(doctor);
                 await dbContext.SaveChangesAsync();
                 return mapper.Map<Doctor, DoctorModel>(doctor);
