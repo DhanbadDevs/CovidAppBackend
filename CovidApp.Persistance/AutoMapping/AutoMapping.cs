@@ -33,7 +33,10 @@ namespace CovidApp.Persistance.AutoMapping
             CreateMap<Oxygen, OxygenModel>();
             CreateMap<Helpline, HelplineModel>();
             CreateMap<HelplineModel, Helpline>();
-
+            CreateMap<FeedBack, FeedbackModel>();
+            CreateMap<FeedbackModel, FeedBack>();
+            CreateMap<Volunteer, VolunteerModel>();
+            CreateMap<VolunteerModel, Volunteer>();
         }
     }
 }

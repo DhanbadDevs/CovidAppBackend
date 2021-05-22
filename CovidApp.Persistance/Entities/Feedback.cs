@@ -18,9 +18,9 @@ namespace CovidApp.Persistance.Entities
         public string Email { get; set; }
         [StringLength(100)]
         public string Phone { get; set; }
-        [Column("Feedback")]
+        [Column("Comment")]
         [StringLength(500)]
-        public string Feedback1 { get; set; }
+        public string Comment { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? UpdatedOn { get; set; }
         [Column(TypeName = "datetime")]

@@ -14,5 +14,9 @@ namespace CovidApp.Persistance.API
         Task<LocationModel> AddLocation(LocationModel locationModel);
         Task<IList<HelplineModel>> GetHelpline(long cityId);
         Task<HelplineModel> AddHelpline(HelplineModel helplineModel);
+        Task<IList<FeedbackModel>> GetFeedback(long cityId);
+        Task<FeedbackModel> AddFeedback(FeedbackModel feedbackModel);
+        Task<IList<VolunteerModel>> GetVolunteer(long cityId);
+        Task<VolunteerModel> AddVolunteer(VolunteerModel volunteerModel);
     }
 }

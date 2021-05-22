@@ -22,6 +22,11 @@ namespace CovidApp.Core.Services
             return await masterRepository.AddCity(cityModel);
         }
 
+        public async Task<FeedbackModel> AddFeedback(FeedbackModel feedbackModel)
+        {
+            return await masterRepository.AddFeedback(feedbackModel);
+        }
+
         public async Task<HelplineModel> AddHelpline(HelplineModel helplineModel)
         {
             return await masterRepository.AddHelpline(helplineModel);
@@ -32,9 +37,19 @@ namespace CovidApp.Core.Services
             return await masterRepository.AddLocation(locationModel);
         }
 
+        public async Task<VolunteerModel> AddVolunteer(VolunteerModel volunteerModel)
+        {
+            return await masterRepository.AddVolunteer(volunteerModel);
+        }
+
         public async Task<IList<CityModel>> GetCities()
         {
             return await masterRepository.GetCities();    
+        }
+
+        public async Task<IList<FeedbackModel>> GetFeedback(long cityId)
+        {
+            return await masterRepository.GetFeedback(cityId);
         }
 
         public async Task<IList<HelplineModel>> GetHelpline(long cityId)
@@ -45,6 +60,11 @@ namespace CovidApp.Core.Services
         public async Task<IList<LocationModel>> GetLocations(long cityId, long locationTypeId)
         {
             return await masterRepository.GetLocations(cityId, locationTypeId);
+        }
+
+        public async Task<IList<VolunteerModel>> GetVolunteer(long cityId)
+        {
+            return await masterRepository.GetVolunteer(cityId);
         }
     }
 }

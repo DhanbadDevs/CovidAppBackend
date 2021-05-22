@@ -18,6 +18,8 @@ namespace CovidApp.Common.Constants
         public const string NoCityFound = "No City found";
         public const string NoLocationFound = "Error occured while fetching Location";
         public const string NoHelplinesFound = "No Helplines Found";
+        public const string NoFeedbacksFound = "No Feedbacks Found";
+        public const string NoVolunteersFound = "No Volunteer Requests Found";
         //HospitalBed
         public const string NoHospitalBedsFound = "No Hospital Beds found";
         //Medicine
@@ -27,6 +29,5 @@ namespace CovidApp.Common.Constants
         public const string NoOxygenFound = "No Oxygen found";
         //Doctor
         public const string NoDoctorsFound = "No Doctors Found";
-
     }
 }
