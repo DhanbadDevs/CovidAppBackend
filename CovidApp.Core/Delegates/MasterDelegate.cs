@@ -30,6 +30,19 @@ namespace CovidApp.Core.Delegates
             return new ServerResponse<CityModel> { Message = Messages.OperationSuccessful, Payload = city };
         }
 
+        public async Task<ServerResponse<FeedbackModel>> AddFeedback(FeedbackModel feedbackModel)
+        {
+            if (feedbackModel == null ||  feedbackModel.CityId == 0 || feedbackModel.CreatedOn == null)
+                return new ServerResponse<FeedbackModel> { Message = Messages.InvalidInput };
+
+            var result = await masterService.AddFeedback(feedbackModel);
+
+            if (result == null)
+                return new ServerResponse<FeedbackModel> { Message = Messages.ErrorOccured };
+
+            return new ServerResponse<FeedbackModel> { Message = Messages.OperationSuccessful, Payload = result };
+        }
+
         public async Task<ServerResponse<HelplineModel>> AddHelpline(HelplineModel helplineModel)
         {
             if (helplineModel == null || String.IsNullOrWhiteSpace(helplineModel.HelplineName) 
@@ -58,6 +71,20 @@ namespace CovidApp.Core.Delegates
             
         }
 
+        public async Task<ServerResponse<VolunteerModel>> AddVolunteer(VolunteerModel volunteerModel)
+        {
+            if (volunteerModel == null || String.IsNullOrWhiteSpace(volunteerModel.VolunteerName)
+                    || volunteerModel.CityId == 0 || volunteerModel.CreatedOn == null)
+                return new ServerResponse<VolunteerModel> { Message = Messages.InvalidInput };
+
+            var result = await masterService.AddVolunteer(volunteerModel);
+
+            if (result == null)
+                return new ServerResponse<VolunteerModel> { Message = Messages.ErrorOccured };
+
+            return new ServerResponse<VolunteerModel> { Message = Messages.OperationSuccessful, Payload = result };
+        }
+
         public async Task<ServerResponse<IList<CityModel>>> GetCities()
         {
             IList<CityModel> result = await masterService.GetCities();
@@ -69,9 +96,20 @@ namespace CovidApp.Core.Delegates
                 return new ServerResponse<IList<CityModel>> { Message = Messages.OperationSuccessful, Payload = result };
         }
 
+        public async Task<ServerResponse<IList<FeedbackModel>>> GetFeedback(long cityId)
+        {
+            IList<FeedbackModel> result = await masterService.GetFeedback(cityId);
+            if (result == null)
+                return new ServerResponse<IList<FeedbackModel>> { Message = Messages.ErrorOccured };
+            else if (!result.Any())
+                return new ServerResponse<IList<FeedbackModel>> { Message = Messages.NoFeedbacksFound };
+            else
+                return new ServerResponse<IList<FeedbackModel>> { Message = Messages.OperationSuccessful, Payload = result };
+        }
+
         public async Task<ServerResponse<IList<HelplineModel>>> GetHelpline(long cityId)
         {
-            IList<HelplineModel> result = await masterService.GetHelpline(cityId);
+            var result = await masterService.GetHelpline(cityId);
             if (result == null)
                 return new ServerResponse<IList<HelplineModel>> { Message = Messages.ErrorOccured };
             else if (!result.Any())
@@ -89,6 +127,17 @@ namespace CovidApp.Core.Delegates
                 return new ServerResponse<IList<LocationModel>> { Message = Messages.NoLocationFound };
             else
                 return new ServerResponse<IList<LocationModel>> { Message = Messages.OperationSuccessful, Payload = result };
+        }
+
+        public async Task<ServerResponse<IList<VolunteerModel>>> GetVolunteer(long cityId)
+        {
+            var result = await masterService.GetVolunteer(cityId);
+            if (result == null)
+                return new ServerResponse<IList<VolunteerModel>> { Message = Messages.ErrorOccured };
+            else if (!result.Any())
+                return new ServerResponse<IList<VolunteerModel>> { Message = Messages.NoVolunteersFound };
+            else
+                return new ServerResponse<IList<VolunteerModel>> { Message = Messages.OperationSuccessful, Payload = result };
         }
     }
 }

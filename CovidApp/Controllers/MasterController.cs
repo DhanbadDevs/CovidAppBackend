@@ -67,5 +67,35 @@ namespace CovidApp.Controllers
             return StatusCode(StatusCodes.Status201Created, response);
 
         }
+
+        [HttpGet("feedbacks")]
+        public async Task<IActionResult> GetFeedback( long cityId)
+        {
+            var response = await masterDelegate.GetFeedback(cityId);
+            return Ok(response);
+        }
+
+        [HttpPost("feedbacks")]
+        public async Task<IActionResult> AddFeedback([FromBody] FeedbackModel feedbackModel)
+        {
+            var response = await masterDelegate.AddFeedback(feedbackModel);
+            return StatusCode(StatusCodes.Status201Created, response);
+
+        }
+
+        [HttpGet("volunteers")]
+        public async Task<IActionResult> GetVolunteer( long cityId)
+        {
+            var response = await masterDelegate.GetVolunteer(cityId);
+            return Ok(response);
+        }
+
+        [HttpPost("volunteers")]
+        public async Task<IActionResult> AddVolunteer([FromBody] VolunteerModel VolunteerModel)
+        {
+            var response = await masterDelegate.AddVolunteer(VolunteerModel);
+            return StatusCode(StatusCodes.Status201Created, response);
+
+        }
     }
 }

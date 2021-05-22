@@ -32,6 +32,8 @@ namespace CovidApp.Persistance.CovidAppContext
         public virtual DbSet<Oxygen> Oxygens { get; set; }
         public virtual DbSet<TestingCentre> TestingCentres { get; set; }
         public virtual DbSet<VaccinationCentre> VaccinationCentres { get; set; }
+        public virtual DbSet<FeedBack> FeedBacks { get; set; }
+        public virtual DbSet<Volunteer> Volunteers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -335,6 +337,26 @@ namespace CovidApp.Persistance.CovidAppContext
                     .HasConstraintName("FK_TestingCentre_Location");
             });
 
+            modelBuilder.Entity<FeedBack>(entity =>
+            {
+                entity.Property(e => e.Email).IsUnicode(false);
+
+                entity.Property(e => e.Comment).IsUnicode(false);
+
+                entity.Property(e => e.Name).IsUnicode(false);
+
+                entity.Property(e => e.Phone).IsUnicode(false);
+
+                entity.Property(e => e.UpdatedOn).HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.City)
+                    .WithMany(p => p.FeedBacks)
+                    .HasForeignKey(d => d.CityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Feedback_City");
+            });
+
+
             modelBuilder.Entity<VaccinationCentre>(entity =>
             {
                 entity.Property(e => e.AgeGroup).IsUnicode(false);
@@ -366,8 +388,32 @@ namespace CovidApp.Persistance.CovidAppContext
                     .HasConstraintName("FK_VaccinationCentre_Location");
             });
 
+            modelBuilder.Entity<Volunteer>(entity =>
+            {
+                entity.Property(e => e.About).IsUnicode(false);
+
+                entity.Property(e => e.Email).IsUnicode(false);
+
+                entity.Property(e => e.Occupation).IsUnicode(false);
+
+                entity.Property(e => e.Phone).IsUnicode(false);
+
+                entity.Property(e => e.Timing).IsUnicode(false);
+
+                entity.Property(e => e.UpdatedOn).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.VolunteerName).IsUnicode(false);
+
+                entity.HasOne(d => d.City)
+                    .WithMany(p => p.Volunteers)
+                    .HasForeignKey(d => d.CityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Volunteer_City");
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
+
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }

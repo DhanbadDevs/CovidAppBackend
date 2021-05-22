@@ -42,6 +42,22 @@ namespace CovidApp.Persistance
             }
         }
 
+        public async Task<FeedbackModel> AddFeedback(FeedbackModel feedbackModel)
+        {
+            try
+            {
+                var feedback = mapper.Map<FeedbackModel, FeedBack>(feedbackModel);
+                await dbContext.AddAsync(feedback);
+                await dbContext.SaveChangesAsync();
+                return mapper.Map<FeedBack, FeedbackModel>(feedback);
+            }
+            catch(Exception ex)
+            {
+                logger.LogError("Failed to Add Feedback", ex);
+                return null;
+            }
+        }
+
         public async Task<HelplineModel> AddHelpline(HelplineModel helplineModel)
         {
             try
@@ -74,6 +90,22 @@ namespace CovidApp.Persistance
             }
         }
 
+        public async Task<VolunteerModel> AddVolunteer(VolunteerModel volunteerModel)
+        {
+            try
+            {
+                var volunteer = mapper.Map<VolunteerModel, Volunteer>(volunteerModel);
+                await dbContext.AddAsync(volunteer);
+                await dbContext.SaveChangesAsync();
+                return mapper.Map<Volunteer, VolunteerModel>(volunteer);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Failed to Add Volunteer", ex);
+                return null;
+            }
+        }
+
         public async Task<IList<CityModel>> GetCities()
         {
             try
@@ -86,6 +118,25 @@ namespace CovidApp.Persistance
             catch(Exception ex)
             {
                 logger.LogError("Failed to Get Cities", ex);
+                return null;
+            }
+        }
+
+        public async Task<IList<FeedbackModel>> GetFeedback(long cityId)
+        {
+            try
+            {
+                IQueryable<FeedBack> feedbacks = dbContext.FeedBacks;
+                if (cityId != 0)
+                    feedbacks.Where(x => x.CityId == cityId);
+                var result = await feedbacks.OrderByDescending(x => x.UpdatedOn)
+                                            .ToListAsync();
+
+                return mapper.Map<List<FeedBack>, List<FeedbackModel>>(result);
+            }
+            catch(Exception ex)
+            {
+                logger.LogError("Failed to Get Feedback", ex);
                 return null;
             }
         }
@@ -120,6 +171,25 @@ namespace CovidApp.Persistance
             catch(Exception ex)
             {
                 logger.LogError("Failed to Get Location", ex);
+                return null;
+            }
+        }
+
+        public async Task<IList<VolunteerModel>> GetVolunteer(long cityId)
+        {
+            try
+            {
+                IQueryable<Volunteer> volunteers = dbContext.Volunteers;
+                if (cityId != 0)
+                    volunteers.Where(x => x.CityId == cityId);
+                var result = await volunteers.OrderByDescending(x => x.UpdatedOn)
+                                            .ToListAsync();
+
+                return mapper.Map<List<Volunteer>, List<VolunteerModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Failed to Get Volunteers", ex);
                 return null;
             }
         }
