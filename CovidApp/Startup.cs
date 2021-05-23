@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using CovidApp.Persistance.CovidAppContext;
+using CovidApp.Extensions;
+using CovidApp.Persistance.AutoMapping;
 
 namespace CovidApp
 {
@@ -30,7 +32,11 @@ namespace CovidApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(c => c.AddProfile<AutoMapping>(), typeof(Startup));
+            services.AddCors();
+            services.ConfigureMvc();
             services.AddControllers();
+
 
             var builder = new SqlConnectionStringBuilder(
                                 Configuration.GetConnectionString("CovidAppDatabase"));
@@ -41,24 +47,13 @@ namespace CovidApp
             {
                 options.UseSqlServer(_connectionString);
             });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CovidApp API", Version = "v1" });
             });
 
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(new ResponseCacheAttribute()
-                {
-                    NoStore = true,
-                    Location = ResponseCacheLocation.None
-                });
-            })
-            .AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.IgnoreNullValues = true;
-            })
-            .SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.Register();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +67,12 @@ namespace CovidApp
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true)
+                .AllowCredentials());
 
             app.UseAuthorization();
 

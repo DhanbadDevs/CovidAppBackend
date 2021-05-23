@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Delegates\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\CovidApp.Common\CovidApp.Common.csproj" />
+    <ProjectReference Include="..\CovidApp.Core.API\CovidApp.Core.API.csproj" />
+    <ProjectReference Include="..\CovidApp.Persistance.API\CovidApp.Persistance.API.csproj" />
   </ItemGroup>
 
 </Project>

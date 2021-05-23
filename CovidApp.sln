@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidApp", "CovidApp\CovidApp.csproj", "{BF760A9C-C943-4495-940A-203E816DC909}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CovidApp", "CovidApp\CovidApp.csproj", "{BF760A9C-C943-4495-940A-203E816DC909}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidApp.Model", "CovidApp.Model\CovidApp.Model.csproj", "{A1B5EA71-AE36-419F-A0D6-F6F2AE80BD4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CovidApp.Model", "CovidApp.Model\CovidApp.Model.csproj", "{A1B5EA71-AE36-419F-A0D6-F6F2AE80BD4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidApp.Core", "CovidApp.Core\CovidApp.Core.csproj", "{A0B6FEA2-3520-4164-8F6E-875AE07F2A52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CovidApp.Core", "CovidApp.Core\CovidApp.Core.csproj", "{A0B6FEA2-3520-4164-8F6E-875AE07F2A52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidApp.Core.API", "CovidApp.Core.API\CovidApp.Core.API.csproj", "{261CB301-60B9-4C90-A099-81A858798921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CovidApp.Core.API", "CovidApp.Core.API\CovidApp.Core.API.csproj", "{261CB301-60B9-4C90-A099-81A858798921}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidApp.Persistance", "CovidApp.Persistance\CovidApp.Persistance.csproj", "{556270C7-903B-435C-88CC-3FB7CBC59292}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CovidApp.Persistance", "CovidApp.Persistance\CovidApp.Persistance.csproj", "{556270C7-903B-435C-88CC-3FB7CBC59292}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidApp.Persistance.API", "CovidApp.Persistance.API\CovidApp.Persistance.API.csproj", "{6881A5DD-810B-48D1-8933-BA8B53799274}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CovidApp.Persistance.API", "CovidApp.Persistance.API\CovidApp.Persistance.API.csproj", "{6881A5DD-810B-48D1-8933-BA8B53799274}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidApp.Common", "CovidApp.Common\CovidApp.Common.csproj", "{5EDD8CDC-D7E6-4AEB-931B-C3A676BB393E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{6881A5DD-810B-48D1-8933-BA8B53799274}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6881A5DD-810B-48D1-8933-BA8B53799274}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6881A5DD-810B-48D1-8933-BA8B53799274}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EDD8CDC-D7E6-4AEB-931B-C3A676BB393E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EDD8CDC-D7E6-4AEB-931B-C3A676BB393E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EDD8CDC-D7E6-4AEB-931B-C3A676BB393E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EDD8CDC-D7E6-4AEB-931B-C3A676BB393E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
