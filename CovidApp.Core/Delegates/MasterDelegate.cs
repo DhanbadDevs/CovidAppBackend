@@ -19,8 +19,7 @@ namespace CovidApp.Core.Delegates
         }
         public async Task<ServerResponse<CityModel>> AddCity(CityModel cityModel)
         {
-            if (cityModel == null || String.IsNullOrWhiteSpace(cityModel.CityName) || String.IsNullOrWhiteSpace(cityModel.State)
-                || cityModel.CreatedOn == null)
+            if (cityModel == null || String.IsNullOrWhiteSpace(cityModel.CityName) || String.IsNullOrWhiteSpace(cityModel.State))
                 return new ServerResponse<CityModel> { Message = Messages.InvalidInput };
 
             var city = await masterService.AddCity(cityModel);
@@ -32,7 +31,7 @@ namespace CovidApp.Core.Delegates
 
         public async Task<ServerResponse<FeedbackModel>> AddFeedback(FeedbackModel feedbackModel)
         {
-            if (feedbackModel == null ||  feedbackModel.CityId == 0 || feedbackModel.CreatedOn == null)
+            if (feedbackModel == null ||  feedbackModel.CityId == 0)
                 return new ServerResponse<FeedbackModel> { Message = Messages.InvalidInput };
 
             var result = await masterService.AddFeedback(feedbackModel);
@@ -59,7 +58,7 @@ namespace CovidApp.Core.Delegates
         public async Task<ServerResponse<LocationModel>> AddLocation(LocationModel locationModel)
         {
             if (locationModel == null || String.IsNullOrWhiteSpace(locationModel.LocationName) || String.IsNullOrWhiteSpace(locationModel.Address)
-                    || locationModel.CityId == 0 || locationModel.LocationTypeId == 0 || locationModel.CreatedOn == null)
+                    || locationModel.CityId == 0 || locationModel.LocationTypeId == 0)
                 return new ServerResponse<LocationModel> { Message =  Messages.InvalidInput };
 
             var result = await masterService.AddLocation(locationModel);
@@ -74,7 +73,7 @@ namespace CovidApp.Core.Delegates
         public async Task<ServerResponse<VolunteerModel>> AddVolunteer(VolunteerModel volunteerModel)
         {
             if (volunteerModel == null || String.IsNullOrWhiteSpace(volunteerModel.VolunteerName)
-                    || volunteerModel.CityId == 0 || volunteerModel.CreatedOn == null)
+                    || volunteerModel.CityId == 0)
                 return new ServerResponse<VolunteerModel> { Message = Messages.InvalidInput };
 
             var result = await masterService.AddVolunteer(volunteerModel);

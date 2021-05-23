@@ -17,6 +17,8 @@ namespace CovidApp.Core.Services
         }
         public async Task<OxygenModel> AddOxygen(OxygenModel oxygenModel)
         {
+            oxygenModel.CreatedOn = DateTime.UtcNow;
+            oxygenModel.UpdatedOn = DateTime.UtcNow;
             return await oxygenRepository.AddOxygen(oxygenModel);
         }
 

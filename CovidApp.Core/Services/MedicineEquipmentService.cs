@@ -19,11 +19,15 @@ namespace CovidApp.Core.Services
 
         public async Task<MedicineEquipmentMasterModel> AddMedicineEquipment(MedicineEquipmentMasterModel medicineEquipmentMasterModel)
         {
+            medicineEquipmentMasterModel.CreatedOn = DateTime.UtcNow;
+            medicineEquipmentMasterModel.UpdatedOn = DateTime.UtcNow;
             return await medicineEquipmentRepository.AddMedicineEquipment(medicineEquipmentMasterModel);
         }
 
         public async Task<MedicineEquipmentModel> AddMedicineEquipmentShop(MedicineEquipmentModel medicineEquipmentModel)
         {
+            medicineEquipmentModel.CreatedOn = DateTime.UtcNow;
+            medicineEquipmentModel.UpdatedOn = DateTime.UtcNow;
             return await medicineEquipmentRepository.AddMedicineEquipmentShop(medicineEquipmentModel);
         }
 

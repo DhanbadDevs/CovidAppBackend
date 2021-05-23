@@ -21,8 +21,7 @@ namespace CovidApp.Core.Delegates
 
         public async Task<ServerResponse<HospitalBedModel>> AddOrUpdateHospitalBed(HospitalBedModel hospitalBedModel)
         {
-            if (hospitalBedModel == null || hospitalBedModel.LocationId == 0 || hospitalBedModel.CityId == 0
-                 || hospitalBedModel.CreatedOn == null)
+            if (hospitalBedModel == null || hospitalBedModel.LocationId == 0 || hospitalBedModel.CityId == 0)
                 return new ServerResponse<HospitalBedModel> { Message = Messages.InvalidInput };
 
             var result = await hospitalBedService.AddOrUpdateHospitalBed(hospitalBedModel);

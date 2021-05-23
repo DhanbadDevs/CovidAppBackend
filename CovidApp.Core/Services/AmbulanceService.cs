@@ -19,6 +19,8 @@ namespace CovidApp.Core.Services
 
         public async Task<AmbulanceModel> AddAmbulance(AmbulanceModel ambulanceModel)
         {
+            ambulanceModel.CreatedOn = DateTime.UtcNow;
+            ambulanceModel.UpdatedOn = DateTime.UtcNow;
             return await ambulanceRepository.AddAmbulance(ambulanceModel);
         }
 

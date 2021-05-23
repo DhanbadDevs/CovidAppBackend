@@ -19,26 +19,36 @@ namespace CovidApp.Core.Services
 
         public async Task<CityModel> AddCity(CityModel cityModel)
         {
+            cityModel.CreatedOn = DateTime.UtcNow;
+            cityModel.UpdatedOn = DateTime.UtcNow;
             return await masterRepository.AddCity(cityModel);
         }
 
         public async Task<FeedbackModel> AddFeedback(FeedbackModel feedbackModel)
         {
+            feedbackModel.CreatedOn = DateTime.UtcNow;
+            feedbackModel.UpdatedOn = DateTime.UtcNow;
             return await masterRepository.AddFeedback(feedbackModel);
         }
 
         public async Task<HelplineModel> AddHelpline(HelplineModel helplineModel)
         {
+            helplineModel.CreatedOn = DateTime.UtcNow;
+            helplineModel.UpdatedOn = DateTime.UtcNow;
             return await masterRepository.AddHelpline(helplineModel);
         }
 
         public async Task<LocationModel> AddLocation(LocationModel locationModel)
         {
+            locationModel.CreatedOn = DateTime.UtcNow;
+            locationModel.UpdatedOn = DateTime.UtcNow;
             return await masterRepository.AddLocation(locationModel);
         }
 
         public async Task<VolunteerModel> AddVolunteer(VolunteerModel volunteerModel)
         {
+            volunteerModel.CreatedOn = DateTime.UtcNow;
+            volunteerModel.UpdatedOn = DateTime.UtcNow;
             return await masterRepository.AddVolunteer(volunteerModel);
         }
 

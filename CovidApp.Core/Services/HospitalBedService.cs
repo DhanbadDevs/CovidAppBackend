@@ -19,6 +19,8 @@ namespace CovidApp.Core.Services
 
         public async Task<HospitalBedModel> AddOrUpdateHospitalBed(HospitalBedModel hospitalBedModel)
         {
+            hospitalBedModel.CreatedOn = DateTime.UtcNow;
+            hospitalBedModel.UpdatedOn = DateTime.UtcNow;
             return await hospitalBedRepository.AddOrUpdateHospitalBed(hospitalBedModel);
         }
 

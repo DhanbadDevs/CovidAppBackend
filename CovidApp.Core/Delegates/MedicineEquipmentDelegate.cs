@@ -21,7 +21,7 @@ namespace CovidApp.Core.Delegates
 
         public async Task<ServerResponse<MedicineEquipmentMasterModel>> AddMedicineEquipment(MedicineEquipmentMasterModel medicineEquipmentMasterModel)
         {
-            if (medicineEquipmentMasterModel == null || String.IsNullOrWhiteSpace(medicineEquipmentMasterModel.MedicineEquipmentName) || medicineEquipmentMasterModel.CreatedOn == null)
+            if (medicineEquipmentMasterModel == null || String.IsNullOrWhiteSpace(medicineEquipmentMasterModel.MedicineEquipmentName))
                 return new ServerResponse<MedicineEquipmentMasterModel> { Message = Messages.InvalidInput };
 
             var result = await medicineEquipmentService.AddMedicineEquipment(medicineEquipmentMasterModel);
@@ -34,8 +34,7 @@ namespace CovidApp.Core.Delegates
 
         public async Task<ServerResponse<MedicineEquipmentModel>> AddMedicineEquipmentShop(MedicineEquipmentModel medicineEquipmentModel)
         {
-            if (medicineEquipmentModel == null || medicineEquipmentModel.LocationId == 0 || medicineEquipmentModel.CityId == 0
-                 || medicineEquipmentModel.CreatedOn == null)
+            if (medicineEquipmentModel == null || medicineEquipmentModel.LocationId == 0 || medicineEquipmentModel.CityId == 0)
                 return new ServerResponse<MedicineEquipmentModel> { Message = Messages.InvalidInput };
 
             var result = await medicineEquipmentService.AddMedicineEquipmentShop(medicineEquipmentModel);

@@ -20,7 +20,7 @@ namespace CovidApp.Core.Delegates
 
         public async Task<ServerResponse<AmbulanceModel>> AddAmbulance(AmbulanceModel ambulanceModel)
         {
-            if (ambulanceModel == null || String.IsNullOrWhiteSpace(ambulanceModel.AmbulanceName) || ambulanceModel.CityId == 0||ambulanceModel.CreatedOn==null)
+            if (ambulanceModel == null || String.IsNullOrWhiteSpace(ambulanceModel.AmbulanceName) || ambulanceModel.CityId == 0)
                 return new ServerResponse<AmbulanceModel> { Message = Messages.InvalidInput };
             var ambulance = await ambulanceService.AddAmbulance(ambulanceModel);
 

@@ -18,8 +18,7 @@ namespace CovidApp.Core.Delegates
         }
         public async Task<ServerResponse<OxygenModel>> AddOxygen(OxygenModel oxygenModel)
         {
-            if (oxygenModel == null || oxygenModel.LocationId == 0 || oxygenModel.CityId == 0 ||
-                oxygenModel.CreatedOn == null)
+            if (oxygenModel == null || oxygenModel.LocationId == 0 || oxygenModel.CityId == 0)
                 return new ServerResponse<OxygenModel> { Message = Messages.InvalidInput };
 
             var result = await oxygenService.AddOxygen(oxygenModel);

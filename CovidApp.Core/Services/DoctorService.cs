@@ -19,6 +19,8 @@ namespace CovidApp.Core.Services
 
         public async Task<DoctorModel> AddDoctor(DoctorModel doctorModel)
         {
+            doctorModel.CreatedOn = DateTime.UtcNow;
+            doctorModel.UpdatedOn = DateTime.UtcNow;
             return await doctorRepository.AddDoctor(doctorModel);
         }
 

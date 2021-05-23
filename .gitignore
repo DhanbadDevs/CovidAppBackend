@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /CovidApp/Properties
+/SQL Scripts/MVP1.sql
