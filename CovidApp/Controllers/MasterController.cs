@@ -84,9 +84,9 @@ namespace CovidApp.Controllers
         }
 
         [HttpGet("volunteers")]
-        public async Task<IActionResult> GetVolunteer( long cityId)
+        public async Task<IActionResult> GetVolunteer()
         {
-            var response = await masterDelegate.GetVolunteer(cityId);
+            var response = await masterDelegate.GetVolunteer();
             return Ok(response);
         }
 

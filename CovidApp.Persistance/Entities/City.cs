@@ -24,7 +24,6 @@ namespace CovidApp.Persistance.Entities
             TestingCentres = new HashSet<TestingCentre>();
             VaccinationCentres = new HashSet<VaccinationCentre>();
             FeedBacks = new HashSet<FeedBack>();
-            Volunteers = new HashSet<Volunteer>();
         }
 
         [Key]
@@ -62,7 +61,5 @@ namespace CovidApp.Persistance.Entities
         public virtual ICollection<VaccinationCentre> VaccinationCentres { get; set; }
         [InverseProperty(nameof(FeedBack.City))]
         public virtual ICollection<FeedBack> FeedBacks { get; set; }
-        [InverseProperty(nameof(Volunteer.City))]
-        public virtual ICollection<Volunteer> Volunteers { get; set; }
     }
 }

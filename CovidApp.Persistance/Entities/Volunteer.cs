@@ -16,7 +16,6 @@ namespace CovidApp.Persistance.Entities
         [Required]
         [StringLength(100)]
         public string VolunteerName { get; set; }
-        public long CityId { get; set; }
         [StringLength(100)]
         public string Email { get; set; }
         [StringLength(100)]
@@ -31,9 +30,7 @@ namespace CovidApp.Persistance.Entities
         public DateTime? UpdatedOn { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime CreatedOn { get; set; }
-
-        [ForeignKey(nameof(CityId))]
-        [InverseProperty("Volunteers")]
-        public virtual City City { get; set; }
+        [StringLength(100)]
+        public string City { get; set; }
     }
 }

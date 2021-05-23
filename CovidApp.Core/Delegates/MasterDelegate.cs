@@ -72,8 +72,7 @@ namespace CovidApp.Core.Delegates
 
         public async Task<ServerResponse<VolunteerModel>> AddVolunteer(VolunteerModel volunteerModel)
         {
-            if (volunteerModel == null || String.IsNullOrWhiteSpace(volunteerModel.VolunteerName)
-                    || volunteerModel.CityId == 0)
+            if (volunteerModel == null || String.IsNullOrWhiteSpace(volunteerModel.VolunteerName))
                 return new ServerResponse<VolunteerModel> { Message = Messages.InvalidInput };
 
             var result = await masterService.AddVolunteer(volunteerModel);
@@ -128,9 +127,9 @@ namespace CovidApp.Core.Delegates
                 return new ServerResponse<IList<LocationModel>> { Message = Messages.OperationSuccessful, Payload = result };
         }
 
-        public async Task<ServerResponse<IList<VolunteerModel>>> GetVolunteer(long cityId)
+        public async Task<ServerResponse<IList<VolunteerModel>>> GetVolunteer()
         {
-            var result = await masterService.GetVolunteer(cityId);
+            var result = await masterService.GetVolunteer();
             if (result == null)
                 return new ServerResponse<IList<VolunteerModel>> { Message = Messages.ErrorOccured };
             else if (!result.Any())

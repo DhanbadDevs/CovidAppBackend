@@ -392,6 +392,8 @@ namespace CovidApp.Persistance.CovidAppContext
             {
                 entity.Property(e => e.About).IsUnicode(false);
 
+                entity.Property(e => e.City).IsUnicode(false);
+
                 entity.Property(e => e.Email).IsUnicode(false);
 
                 entity.Property(e => e.Occupation).IsUnicode(false);
@@ -403,12 +405,6 @@ namespace CovidApp.Persistance.CovidAppContext
                 entity.Property(e => e.UpdatedOn).HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.VolunteerName).IsUnicode(false);
-
-                entity.HasOne(d => d.City)
-                    .WithMany(p => p.Volunteers)
-                    .HasForeignKey(d => d.CityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Volunteer_City");
             });
 
             OnModelCreatingPartial(modelBuilder);

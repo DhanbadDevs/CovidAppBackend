@@ -16,7 +16,7 @@ namespace CovidApp.Core.API.Delegates
         Task<ServerResponse<HelplineModel>> AddHelpline(HelplineModel helplineModel);
         Task<ServerResponse<IList<FeedbackModel>>> GetFeedback(long cityId);
         Task<ServerResponse<FeedbackModel>> AddFeedback(FeedbackModel feedbackModel);
-        Task<ServerResponse<IList<VolunteerModel>>> GetVolunteer(long cityId);
+        Task<ServerResponse<IList<VolunteerModel>>> GetVolunteer();
         Task<ServerResponse<VolunteerModel>> AddVolunteer(VolunteerModel volunteerModel);
     }
 }

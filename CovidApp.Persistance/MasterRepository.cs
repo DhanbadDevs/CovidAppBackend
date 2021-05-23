@@ -175,14 +175,11 @@ namespace CovidApp.Persistance
             }
         }
 
-        public async Task<IList<VolunteerModel>> GetVolunteer(long cityId)
+        public async Task<IList<VolunteerModel>> GetVolunteer()
         {
             try
             {
-                IQueryable<Volunteer> volunteers = dbContext.Volunteers;
-                if (cityId != 0)
-                    volunteers.Where(x => x.CityId == cityId);
-                var result = await volunteers.OrderByDescending(x => x.UpdatedOn)
+                var result = await dbContext.Volunteers.OrderByDescending(x => x.UpdatedOn)
                                             .ToListAsync();
 
                 return mapper.Map<List<Volunteer>, List<VolunteerModel>>(result);
