@@ -14,6 +14,7 @@ namespace CovidApp.Model
         public string Occupation { get; set; }
         public string About { get; set; }
         public string Timing { get; set; }
+        public string Skills { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public DateTime CreatedOn { get; set; }
     }

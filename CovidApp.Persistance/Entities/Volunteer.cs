@@ -26,6 +26,8 @@ namespace CovidApp.Persistance.Entities
         public string About { get; set; }
         [StringLength(100)]
         public string Timing { get; set; }
+        [StringLength(200)]
+        public string Skills { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? UpdatedOn { get; set; }
         [Column(TypeName = "datetime")]

@@ -402,6 +402,8 @@ namespace CovidApp.Persistance.CovidAppContext
 
                 entity.Property(e => e.Timing).IsUnicode(false);
 
+                entity.Property(e => e.Skills).IsUnicode(false);
+
                 entity.Property(e => e.UpdatedOn).HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.VolunteerName).IsUnicode(false);
