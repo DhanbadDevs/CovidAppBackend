@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using CovidApp.Persistance.CovidAppContext;
 using CovidApp.Extensions;
 using CovidApp.Persistance.AutoMapping;
+using CovidApp.Core.BackgroundWorkers;
 
 namespace CovidApp
 {
@@ -47,6 +48,8 @@ namespace CovidApp
             {
                 options.UseSqlServer(_connectionString);
             });
+
+            services.AddHostedService(i => i.GetService<IAVScrapperBackgroundWorker>());
 
             services.AddSwaggerGen(c =>
             {

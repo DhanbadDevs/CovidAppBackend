@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CovidApp.Core.API\CovidApp.Core.API.csproj" />
     <ProjectReference Include="..\CovidApp.Core\CovidApp.Core.csproj" />
+    <ProjectReference Include="..\CovidApp.Integration\CovidApp.Integration.csproj" />
     <ProjectReference Include="..\CovidApp.Persistance\CovidApp.Persistance.csproj" />
   </ItemGroup>
 

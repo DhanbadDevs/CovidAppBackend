@@ -1,8 +1,12 @@
-﻿using CovidApp.Core.API.Services;
+﻿using CovidApp.Common.Enums;
+using CovidApp.Core.API.Services;
+using CovidApp.Integration.AmritVahini;
+using CovidApp.Integration.API.AmritVahini;
 using CovidApp.Model;
 using CovidApp.Persistance.API;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,16 +21,10 @@ namespace CovidApp.Core.Services
             this.hospitalBedRepository = hospitalBedRepository;
         }
 
-        public async Task<HospitalBedModel> AddOrUpdateHospitalBed(HospitalBedModel hospitalBedModel)
-        {
-            hospitalBedModel.CreatedOn = DateTime.UtcNow;
-            hospitalBedModel.UpdatedOn = DateTime.UtcNow;
-            return await hospitalBedRepository.AddOrUpdateHospitalBed(hospitalBedModel);
-        }
-
-        public async Task<IList<HospitalBedModel>> GetHospitalBeds( int cityId)
+        public async Task<IList<HospitalBedModel>> GetHospitalBeds(int cityId)
         {
             return await hospitalBedRepository.GetHospitalBeds(cityId);
         }
     }
+
 }

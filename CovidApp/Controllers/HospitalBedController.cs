@@ -29,12 +29,5 @@ namespace CovidApp.Controllers
             var response = await hospitalBedDelegate.GetHospitalBeds(cityId);
             return Ok(response);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> AddOrUpdateHospitalBed([FromBody] HospitalBedModel hospitalBedModel)
-        {
-            var response = await hospitalBedDelegate.AddOrUpdateHospitalBed(hospitalBedModel);
-            return StatusCode(StatusCodes.Status201Created, response);
-        }
     }
 }

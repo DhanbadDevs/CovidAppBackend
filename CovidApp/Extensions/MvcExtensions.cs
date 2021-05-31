@@ -1,7 +1,10 @@
 ﻿using CovidApp.Core.API.Delegates;
 using CovidApp.Core.API.Services;
+using CovidApp.Core.BackgroundWorkers;
 using CovidApp.Core.Delegates;
 using CovidApp.Core.Services;
+using CovidApp.Integration.AmritVahini;
+using CovidApp.Integration.API.AmritVahini;
 using CovidApp.Persistance;
 using CovidApp.Persistance.API;
 using Microsoft.AspNetCore.Mvc;
@@ -64,6 +67,8 @@ namespace CovidApp.Extensions
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IDoctorDelegate, DoctorDelegate>();
+            services.AddSingleton<IAmritVahiniGateway, AmritVahiniGateway>();
+            services.AddSingleton<IAVScrapperBackgroundWorker, AVScrapperBackgroundWorker>();
         }
     }
 }
