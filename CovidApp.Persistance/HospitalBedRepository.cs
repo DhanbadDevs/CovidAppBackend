@@ -26,19 +26,19 @@ namespace CovidApp.Persistance
             this.mapper = mapper;
         }
 
-        public async Task<HospitalBedModel> AddOrUpdateHospitalBed(HospitalBedModel hospitalBedModel)
+        public async Task AddOrUpdateHospitalBed(IList<HospitalBedModel> hospitalBedModel)
         {
             try
             {
-                var hospitalBed = mapper.Map<HospitalBedModel, HospitalBed>(hospitalBedModel);
-                await dbContext.HospitalBeds.AddAsync(hospitalBed);
+                var hospitalBed = mapper.Map<IList<HospitalBedModel>, IList<HospitalBed>>(hospitalBedModel);
+                foreach(var beds in hospitalBed)
+                    await dbContext.HospitalBeds.AddAsync(beds);
                 await dbContext.SaveChangesAsync();
-                return mapper.Map<HospitalBed, HospitalBedModel>(hospitalBed);
+                logger.LogInformation("Added Hospital Beds at " + DateTime.UtcNow);
             }
             catch(Exception ex)
             {
-                logger.LogError("Failed to Add Hospital Bed", ex);
-                return null;
+                logger.LogError("Failed to Add Hospital Beds", ex);
             }
         }
 
@@ -49,13 +49,9 @@ namespace CovidApp.Persistance
                 var hospitalBeds = await dbContext.HospitalBeds
                                             .Where(x => x.CityId == cityId)
                                             .Include(x => x.Location)
-                                            .ToListAsync();
-                hospitalBeds = hospitalBeds.GroupBy(x => x.LocationId)
-                                            .Select(x => x.OrderByDescending(y => y.UpdatedOn).FirstOrDefault())
                                             .OrderByDescending(x => x.IsVerified)
                                             .ThenByDescending(x => x.Votes)
-                                            .ToList();
-
+                                            .ToListAsync();
 
                 return mapper.Map<List<HospitalBed>, List<HospitalBedModel>>(hospitalBeds);
             }
