@@ -1,6 +1,5 @@
 ﻿using CovidApp.Common.Enums;
 using CovidApp.Core.API.Services;
-using CovidApp.Integration.AmritVahini;
 using CovidApp.Integration.API.AmritVahini;
 using CovidApp.Model;
 using CovidApp.Persistance.API;

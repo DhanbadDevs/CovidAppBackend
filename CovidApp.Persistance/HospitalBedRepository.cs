@@ -26,13 +26,46 @@ namespace CovidApp.Persistance
             this.mapper = mapper;
         }
 
-        public async Task AddOrUpdateHospitalBed(IList<HospitalBedModel> hospitalBedModel)
+        public async Task AddOrUpdateHospitalBed(IList<AmritVahiniDataModel> entries, IList<LocationModel> locations)
         {
             try
             {
-                var hospitalBed = mapper.Map<IList<HospitalBedModel>, IList<HospitalBed>>(hospitalBedModel);
-                foreach(var beds in hospitalBed)
-                    await dbContext.HospitalBeds.AddAsync(beds);
+                
+                 var hospitalBeds = await dbContext.HospitalBeds.Where(x => x.CityId == 1).ToListAsync();
+                //Combine both data to get Bed Availablity Data
+                foreach (var entry in entries)
+                {
+                    var locationData = locations.Where(x => x.LocationName == entry.HospitalName).FirstOrDefault();
+                    if (locationData == null)
+                        continue;
+                    var hospitalBed = hospitalBeds.Where(x => x.LocationId == locationData.Id).FirstOrDefault();
+                    if (hospitalBed != null)
+                    {
+                        hospitalBed.WithoutOxygen = entry.WithoutOxygen;
+                        hospitalBed.WithOxygen = entry.WithOxygen;
+                        hospitalBed.IcuWithoutVentilator = entry.IcuWithoutVentilator;
+                        hospitalBed.IcuWithVentilator = entry.IcuWithVentilator;
+                        hospitalBed.UpdatedOn = DateTime.UtcNow;
+                    }
+                    else
+                    {
+                        var hospitalBedEntity = new HospitalBed
+                        {
+                            WithoutOxygen = entry.WithoutOxygen,
+                            WithOxygen = entry.WithOxygen,
+                            IcuWithoutVentilator = entry.IcuWithoutVentilator,
+                            IcuWithVentilator = entry.IcuWithVentilator,
+                            CityId = locationData.CityId,
+                            Charges = "Not Available",
+                            LocationId = locationData.Id,
+                            IsVerified = true,
+                            UpdatedOn = DateTime.UtcNow,
+                            Phone = locationData.Phone,
+                            CreatedOn = DateTime.UtcNow
+                        };
+                        await dbContext.HospitalBeds.AddAsync(hospitalBedEntity);
+                    }
+                }
                 await dbContext.SaveChangesAsync();
                 logger.LogInformation("Added Hospital Beds at " + DateTime.UtcNow);
             }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CovidApp.Integration.AmritVahini
+namespace CovidApp.Model
 {
     public class AmritVahiniDataModel
     {

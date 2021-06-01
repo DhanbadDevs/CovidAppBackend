@@ -1,4 +1,5 @@
 ﻿using CovidApp.Integration.API.AmritVahini;
+using CovidApp.Model;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Logging;
 using System;

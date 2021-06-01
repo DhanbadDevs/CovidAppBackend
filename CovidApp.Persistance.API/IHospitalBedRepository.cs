@@ -9,6 +9,6 @@ namespace CovidApp.Persistance.API
     public interface IHospitalBedRepository
     {
         Task<IList<HospitalBedModel>> GetHospitalBeds(int cityId);
-        Task AddOrUpdateHospitalBed(IList<HospitalBedModel> hospitalBedModel);
+        Task AddOrUpdateHospitalBed(IList<AmritVahiniDataModel> scrappedEntries, IList<LocationModel> location);
     }
 }

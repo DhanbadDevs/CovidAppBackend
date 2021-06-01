@@ -1,4 +1,4 @@
-﻿using CovidApp.Integration.AmritVahini;
+﻿using CovidApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -42,7 +42,6 @@ namespace CovidApp.Core.BackgroundWorkers
                 var entries = amritVahiniGateway.GetBedData();
                 //Get Locations from DB
                 IList<LocationModel> locations;
-                IList<HospitalBedModel> hospitalBeds;
                 using (var scope = services.CreateScope())
                 {
                     var masterRepository =
@@ -51,51 +50,7 @@ namespace CovidApp.Core.BackgroundWorkers
 
                     locations = await masterRepository.GetLocations(1, (int)LocationType.Hospitals);
                 }
-                using (var scope = services.CreateScope())
-                {
-                    var hospitalBedRepository =
-                        scope.ServiceProvider
-                            .GetRequiredService<IHospitalBedRepository>();
-
-                    hospitalBeds = await hospitalBedRepository.GetHospitalBeds(1);
-                }
-                //Combine both data to get Bed Availablity Data
-                var hospitalBedModels = new List<HospitalBedModel>();
-                foreach (var entry in entries)
-                {
-                    var locationData = locations.Where(x => x.LocationName == entry.HospitalName).FirstOrDefault();
-                    if (locationData == null)
-                        continue;
-                    var hospitalBed = hospitalBeds.Where(x => x.LocationId == locationData.Id).FirstOrDefault();
-                    if (hospitalBed != null)
-                    {
-                        hospitalBed.WithoutOxygen = entry.WithoutOxygen;
-                        hospitalBed.WithOxygen = entry.WithOxygen;
-                        hospitalBed.IcuWithoutVentilator = entry.IcuWithoutVentilator;
-                        hospitalBed.IcuWithVentilator = entry.IcuWithVentilator;
-                        hospitalBed.UpdatedOn = DateTime.UtcNow;
-
-                        hospitalBedModels.Add(hospitalBed);
-                    }
-                    else
-                    {
-                        var hospitalBedModel = new HospitalBedModel
-                        {
-                            WithoutOxygen = entry.WithoutOxygen,
-                            WithOxygen = entry.WithOxygen,
-                            IcuWithoutVentilator = entry.IcuWithoutVentilator,
-                            IcuWithVentilator = entry.IcuWithVentilator,
-                            CityId = locationData.CityId,
-                            Charges = "Not Available",
-                            LocationId = locationData.Id,
-                            IsVerified = true,
-                            UpdatedOn = DateTime.UtcNow,
-                            Phone = locationData.Phone,
-                            CreatedOn = DateTime.UtcNow
-                        };
-                        hospitalBedModels.Add(hospitalBedModel);
-                    }
-                }
+                
                 //Store data to DB
                 using (var scope = services.CreateScope())
                 {
@@ -103,7 +58,7 @@ namespace CovidApp.Core.BackgroundWorkers
                         scope.ServiceProvider
                             .GetRequiredService<IHospitalBedRepository>();
 
-                    await hospitalBedRepository.AddOrUpdateHospitalBed(hospitalBedModels);
+                    await hospitalBedRepository.AddOrUpdateHospitalBed(entries, locations);
                 }
                 //Wait 3 hours to run again
                 await Task.Delay(TimeSpan.FromHours(3), cancellationToken);

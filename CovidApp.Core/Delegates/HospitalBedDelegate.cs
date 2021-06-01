@@ -1,7 +1,6 @@
 ﻿using CovidApp.Common.Constants;
 using CovidApp.Core.API.Delegates;
 using CovidApp.Core.API.Services;
-using CovidApp.Integration.AmritVahini;
 using CovidApp.Model;
 using System;
 using System.Collections.Generic;
